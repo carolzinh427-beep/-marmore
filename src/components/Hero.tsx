@@ -36,14 +36,6 @@ export const Hero: React.FC = () => {
           <StoneLogo size="hero" showTagline={true} />
         </div>
 
-        {/* Badge de Destaque */}
-        <div className="inline-flex items-center gap-2.5 px-4 py-1.5 border border-[#D4AF37]/40 bg-black/60 backdrop-blur-md mb-6 rounded-full shadow-[0_0_15px_rgba(212,175,55,0.2)]">
-          <span className="w-2 h-2 rounded-full bg-[#D4AF37] animate-ping" />
-          <span className="text-[10px] sm:text-xs uppercase tracking-[0.25em] text-[#F7E7AD] font-semibold">
-            Marmoraria de Luxo • {siteConfig.city}
-          </span>
-        </div>
-
         {/* Título Principal de Alta Conversão */}
         <h1 className="font-serif text-3xl sm:text-5xl lg:text-6xl font-light text-white leading-[1.12] max-w-4xl tracking-tight mb-6">
           ELEGÂNCIA ESCULPIDA EM <br className="hidden sm:inline" />

@@ -71,27 +71,6 @@ export const MaterialsSection: React.FC = () => {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 relative z-10">
         
-        {/* Header do Catálogo Unificado */}
-        <div className="text-center max-w-3xl mx-auto mb-12 space-y-4">
-          <div className="inline-flex items-center gap-2 px-4 py-1 bg-black/60 border border-[#D4AF37]/40 rounded-full">
-            <Sparkles className="w-3.5 h-3.5 text-[#D4AF37]" />
-            <span className="text-[10px] sm:text-xs uppercase tracking-[0.25em] text-[#F7E7AD] font-semibold">
-              CATÁLOGO UNIFICADO STONE GRAN LUX ({siteConfig.materials.length} PEDRAS NOBRES)
-            </span>
-          </div>
-
-          <h2 className="font-serif text-3xl sm:text-5xl font-light leading-tight tracking-tight text-white">
-            COLEÇÃO COMPLETA DE <br />
-            <span className="font-normal italic text-transparent bg-clip-text bg-gradient-to-r from-[#F7E7AD] via-[#D4AF37] to-[#C5A059]">
-              PEDRAS EXÓTICAS & NACIONAIS
-            </span>
-          </h2>
-
-          <p className="text-sm text-gray-300 font-light leading-relaxed max-w-2xl mx-auto">
-            Navegue por todo o nosso acervo de rochas selecionadas à mão. Utilize os filtros de categoria e a paginação abaixo para explorar com conforto.
-          </p>
-        </div>
-
         {/* Filtros e Barra de Pesquisa */}
         <div className="flex flex-col md:flex-row items-center justify-between gap-4 mb-10 bg-black/80 p-4 border border-[#D4AF37]/30 rounded-sm shadow-xl">
           {/* Tabs de Categoria */}
