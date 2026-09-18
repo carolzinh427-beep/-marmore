@@ -179,7 +179,7 @@ export const siteConfig: SiteConfig = {
       category: "quartzitos",
       subtitle: "Fundo Alvo Puríssimo com Pontilhados Mineral escuros",
       description: "Superfície contemporânea com estética vibrante inspirada no contraste da fruta pitaya. Traz amplitude imediata e luz para cozinhas gourmets e banheiros modernos.",
-      image: "/images/material_quartzite.jpg",
+      image: "/images/branco_pitaya.jpg",
       features: [
         "Elevado contraste de branco puríssimo e grãos escuros",
         "Sensação de ambiente mais amplo e luminoso",
