@@ -4,7 +4,6 @@ import { Hero } from './components/Hero';
 import { DifferentialsSection } from './components/DifferentialsSection';
 import { MaterialsSection } from './components/MaterialsSection';
 import { SolutionsSection } from './components/SolutionsSection';
-import { BudgetCalculator } from './components/BudgetCalculator';
 import { PortfolioSection } from './components/PortfolioSection';
 import { ProcessSection } from './components/ProcessSection';
 import { AboutSection } from './components/AboutSection';
@@ -33,31 +32,28 @@ export const App: React.FC = () => {
       {/* 3. Soluções Arquitetônicas & Aplicações: FUNDO BRANCO */}
       <SolutionsSection />
 
-      {/* 4. Simulador de Orçamento Instantâneo: FUNDO PRETO */}
-      <BudgetCalculator />
-
-      {/* 5. Galeria de Portfólio VIP: FUNDO BRANCO */}
+      {/* 4. Galeria de Portfólio VIP: FUNDO PRETO */}
       <PortfolioSection />
 
-      {/* 6. Processo de Trabalho em 4 Etapas: FUNDO PRETO */}
+      {/* 5. Processo de Trabalho em 4 Etapas: FUNDO BRANCO */}
       <ProcessSection />
 
-      {/* 7. Institucional & Showroom: FUNDO BRANCO */}
+      {/* 6. Institucional & Showroom: FUNDO PRETO */}
       <AboutSection />
 
-      {/* 8. Perguntas Frequentes (FAQ): FUNDO PRETO */}
+      {/* 7. Perguntas Frequentes (FAQ): FUNDO BRANCO */}
       <FaqSection />
 
-      {/* 9. Depoimentos de Arquitetos & Clientes VIP: FUNDO BRANCO */}
+      {/* 8. Depoimentos de Arquitetos & Clientes VIP: FUNDO PRETO */}
       <TestimonialsSection />
 
-      {/* 10. Formulário de Contato & Mapa Showroom: FUNDO PRETO */}
+      {/* 9. Formulário de Contato & Mapa Showroom: FUNDO BRANCO */}
       <ContactSection />
 
-      {/* 11. Call-to-Action Banner Final: FUNDO PRETO */}
+      {/* 10. Call-to-Action Banner Final: FUNDO PRETO */}
       <CtaBanner />
 
-      {/* 12. Footer Minimalista de Luxo: FUNDO PRETO */}
+      {/* 11. Footer Minimalista de Luxo: FUNDO PRETO */}
       <Footer />
 
       {/* Botão Flutuante do WhatsApp */}

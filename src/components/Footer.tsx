@@ -77,9 +77,6 @@ export const Footer: React.FC = () => {
                 <a href="#solucoes" className="hover:text-[#D4AF37] transition-colors">Aplicações</a>
               </li>
               <li>
-                <a href="#simulador" className="hover:text-[#D4AF37] transition-colors">Simulador de Orçamento</a>
-              </li>
-              <li>
                 <a href="#portfolio" className="hover:text-[#D4AF37] transition-colors">Portfólio Entregue</a>
               </li>
               <li>

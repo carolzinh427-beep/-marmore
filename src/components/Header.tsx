@@ -25,7 +25,6 @@ export const Header: React.FC = () => {
     { name: 'Diferenciais', href: '#diferenciais' },
     { name: 'Pedras & Materiais', href: '#materiais' },
     { name: 'Aplicações', href: '#solucoes' },
-    { name: 'Simulador', href: '#simulador' },
     { name: 'Portfólio', href: '#portfolio' },
     { name: 'Contato', href: '#contato' },
   ];
