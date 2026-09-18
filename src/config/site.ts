@@ -24,17 +24,6 @@ export interface SolutionItem {
   highlights: string[];
 }
 
-export interface PortfolioProject {
-  id: string;
-  title: string;
-  category: 'Cozinhas' | 'Banheiros' | 'Gourmet' | 'Escadas' | 'Painéis & Ônix' | 'Comerciais';
-  environment: string;
-  materialUsed: string;
-  description: string;
-  image: string;
-  location?: string;
-}
-
 export interface ProcessStep {
   number: string;
   title: string;
@@ -76,7 +65,6 @@ export interface SiteConfig {
   heroImage: string;
   materials: MaterialItem[];
   solutions: SolutionItem[];
-  portfolio: PortfolioProject[];
   processSteps: ProcessStep[];
   differentials: DifferentialItem[];
   faqs: FaqItem[];
@@ -304,6 +292,166 @@ export const siteConfig: SiteConfig = {
         rarity: "Super Raro",
         estimatedPrice: "Consulte m²"
       }
+    },
+    {
+      id: "taj-mahal-quartzite",
+      name: "Taj Mahal Quartzite",
+      category: "quartzitos",
+      subtitle: "Nobreza Marfim com Veias Áureas Delicadas",
+      description: "Considerado o rei dos quartzitos internacionais. Tom bege marfim acetinado atravessado por rios suaves de ouro e bronze mineral.",
+      image: "/images/material_quartzite.jpg",
+      features: [
+        "Resistência mecânica extrema",
+        "Padrão cromático neutro e sofisticado",
+        "Ideal para cozinhas integradas de altíssimo padrão"
+      ],
+      specs: {
+        origin: "Ceará, Brasil / Exportação VIP",
+        finish: "Polido Velvet",
+        thickness: "2.0 cm",
+        rarity: "Coleção Exclusiva",
+        estimatedPrice: "Consulte m²"
+      }
+    },
+    {
+      id: "perla-santana",
+      name: "Perla Santana",
+      category: "quartzitos",
+      subtitle: "Elegância Pérola Iridescente & Suavidade",
+      description: "Fundo perolado translúcido com formações minerais onduladas que lembram madrepérola natural. Transmite paz e nobreza.",
+      image: "/images/solution_bathroom.jpg",
+      features: [
+        "Brilho iridescente sob luz natural",
+        "Porosidade extremamente baixa",
+        "Perfeito para suítes máster e lavabos esculpidos"
+      ],
+      specs: {
+        origin: "Brasil Exclusivo",
+        finish: "Polido Espelhado",
+        thickness: "2.0 cm",
+        rarity: "Tendência",
+        estimatedPrice: "Consulte m²"
+      }
+    },
+    {
+      id: "blue-patagonia",
+      name: "Blue Patagonia",
+      category: "exoticos",
+      subtitle: "Exótico Monumental Azul Profundo & Cristais Ouro",
+      description: "Rocha exótica vulcânica com blocos de quartzo azul lápis-lazúli fundidos em veios dourados e pretos. Uma verdadeira joia da natureza.",
+      image: "/images/material_onyx.jpg",
+      features: [
+        "Superfície joia com seções translúcidas",
+        "Impacto visual imponente no ambiente",
+        "Indicado para painéis e ilhas monumentais"
+      ],
+      specs: {
+        origin: "Patagônia / Importado",
+        finish: "Polido Luxo",
+        thickness: "2.0 cm - 3.0 cm",
+        rarity: "Super Raro",
+        estimatedPrice: "Consulte m²"
+      }
+    },
+    {
+      id: "preto-absoluto",
+      name: "Preto Absoluto",
+      category: "granitos",
+      subtitle: "Preto Maciço Puríssimo Sem Variações",
+      description: "O granito negro de maior pureza do planeta. Ausência total de veios ou manchas, oferecendo um espelho preto absoluto.",
+      image: "/images/hero_black_gold_marble.jpg",
+      features: [
+        "Visual monobloco contemporâneo",
+        "Resistência incomparável a riscos",
+        "Acabamento escovado ou espelhado"
+      ],
+      specs: {
+        origin: "Índia / Importação Selecionada",
+        finish: "Polido / Leathered",
+        thickness: "2.0 cm",
+        rarity: "Clássico Nobre",
+        estimatedPrice: "Consulte m²"
+      }
+    },
+    {
+      id: "branco-dallas",
+      name: "Branco Dallas",
+      category: "granitos",
+      subtitle: "Branco Suave com Movimentos de Cinza Mineral",
+      description: "Granito claro refinado com pontilhados cinzentos e lilás sutis. Oferece alta luminosidade com durabilidade extrema.",
+      image: "/images/material_marble.jpg",
+      features: [
+        "Excelente relação estética e custo-benefício",
+        "Fácil manutenção no dia a dia",
+        "Combina com marcenaria clara e escura"
+      ],
+      specs: {
+        origin: "Espírito Santo, Brasil",
+        finish: "Polido",
+        thickness: "2.0 cm",
+        rarity: "Clássico Nobre",
+        estimatedPrice: "Consulte m²"
+      }
+    },
+    {
+      id: "verde-ubatuba",
+      name: "Verde Ubatuba",
+      category: "granitos",
+      subtitle: "Verde Musgo Escuro com Cristais Dourados",
+      description: "Rocha natural verde escuro quase negra com partículas douradas reluzentes. Tradicional e altamente resistente.",
+      image: "/images/verde_guatemala.jpg",
+      features: [
+        "Resistente a calor e manchas de graxa",
+        "Efeito cintilante sob sol ou iluminação",
+        "Ótimo para churrasqueiras e áreas gourmets"
+      ],
+      specs: {
+        origin: "São Paulo, Brasil",
+        finish: "Polido / Escovado",
+        thickness: "2.0 cm",
+        rarity: "Clássico Nobre",
+        estimatedPrice: "Consulte m²"
+      }
+    },
+    {
+      id: "marrom-absoluto",
+      name: "Marrom Absoluto",
+      category: "granitos",
+      subtitle: "Tom Marrom Cacau Profundo e Homogêneo",
+      description: "Granito nobre em tom marrom café com grãos finos. Traz sofisticação sutil e calor aos ambientes residenciais.",
+      image: "/images/material_granite.jpg",
+      features: [
+        "Estética terrosa elegante",
+        "Combina perfeitamente com madeira nobre",
+        "Resistência para bancadas e pisos"
+      ],
+      specs: {
+        origin: "Minas Gerais, Brasil",
+        finish: "Polido",
+        thickness: "2.0 cm",
+        rarity: "Clássico Nobre",
+        estimatedPrice: "Consulte m²"
+      }
+    },
+    {
+      id: "amarelo-ornamental",
+      name: "Amarelo Ornamental",
+      category: "granitos",
+      subtitle: "Aquecimento Dourado com Grãos Castanhos",
+      description: "Granito dourado de fundo bege com salpicos castanhos e prateados. Traz calor e vida para espaços sociais.",
+      image: "/images/onix_branco.jpg",
+      features: [
+        "Tom dourado acolhedor",
+        "Alta durabilidade em ambientes externos",
+        "Tradição de beleza natural"
+      ],
+      specs: {
+        origin: "Espírito Santo, Brasil",
+        finish: "Polido",
+        thickness: "2.0 cm",
+        rarity: "Clássico Nobre",
+        estimatedPrice: "Consulte m²"
+      }
     }
   ],
 
@@ -339,49 +487,6 @@ export const siteConfig: SiteConfig = {
       description: "Escadas monumentais com acabamento bisotado, frisos antiderrapantes discretos e canaletas para fitas de LED.",
       image: "/images/solution_staircase.jpg",
       highlights: ["Estrutura flutuante", "Friso antiderrapante a laser", "LED embutido no piso"]
-    }
-  ],
-
-  portfolio: [
-    {
-      id: "proj-1",
-      title: "Ilha Monolítica em Ilha Ônix Rosa",
-      category: "Painéis & Ônix",
-      environment: "Cozinha Integrada Gourmet",
-      materialUsed: "Ilha Ônix Rosa Translúcido",
-      description: "Ilha central com iluminação cênica interna e acabamentos em latão dourado escovado.",
-      image: "/images/onix_rosa.jpg",
-      location: "Jardins, SP"
-    },
-    {
-      id: "proj-2",
-      title: "Lavabo VIP em Verde Guatemala",
-      category: "Banheiros",
-      environment: "Lavabo Social Residencial",
-      materialUsed: "Mármore Verde Guatemala",
-      description: "Bancada suspensa com cuba esculpida e parede inteira revestida em página única.",
-      image: "/images/verde_guatemala.jpg",
-      location: "Alphaville, SP"
-    },
-    {
-      id: "proj-3",
-      title: "Cozinha Gourmet Preto São Gabriel Escovado",
-      category: "Cozinhas",
-      environment: "Espaço Gourmet Integrado",
-      materialUsed: "Granito Preto São Gabriel",
-      description: "Bancada contínua com cascata lateral e calha úmida embutida.",
-      image: "/images/hero_black_gold_marble.jpg",
-      location: "Itaim Bibi, SP"
-    },
-    {
-      id: "proj-4",
-      title: "Painel de Recepção em Ilha Ônix Branco",
-      category: "Painéis & Ônix",
-      environment: "Hall de Entrada Corporativo",
-      materialUsed: "Ilha Ônix Branco Translúcido",
-      description: "Painel de 4 metros retroiluminado realçando os veios em tom ambarado.",
-      image: "/images/onix_branco.jpg",
-      location: "Faria Lima, SP"
     }
   ],
 
@@ -460,7 +565,7 @@ export const siteConfig: SiteConfig = {
     },
     {
       question: "Como solicitar um orçamento de forma rápida?",
-      answer: "Você pode clicar em qualquer botão 'Solicitar Orçamento via WhatsApp' ou utilizar nosso Simulador de Orçamento nesta página. Basta enviar as medidas aproximadas ou o projeto arquitetônico em PDF para nossa equipe retornar com o valor detalhado."
+      answer: "Você pode clicar em qualquer botão 'Solicitar Orçamento via WhatsApp' nesta página. Basta enviar as medidas aproximadas ou o projeto arquitetônico em PDF para nossa equipe retornar com o valor detalhado."
     },
     {
       question: "Qual o prazo médio de entrega e instalação?",

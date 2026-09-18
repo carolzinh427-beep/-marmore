@@ -1,11 +1,14 @@
-import React, { useState } from 'react';
-import { ArrowUpRight, Search, Sparkles, MessageCircle, Eye, ShieldCheck, Filter } from 'lucide-react';
+import React, { useState, useMemo } from 'react';
+import { ArrowUpRight, Search, Sparkles, MessageCircle, Eye, ChevronLeft, ChevronRight } from 'lucide-react';
 import { siteConfig, MaterialItem } from '../config/site';
 
 export const MaterialsSection: React.FC = () => {
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [searchQuery, setSearchQuery] = useState<string>('');
+  const [currentPage, setCurrentPage] = useState<number>(1);
   const [activeModalMaterial, setActiveModalMaterial] = useState<MaterialItem | null>(null);
+
+  const itemsPerPage = 6;
 
   const categories = [
     { id: 'all', label: 'Todas as Pedras' },
@@ -16,13 +19,42 @@ export const MaterialsSection: React.FC = () => {
     { id: 'granitos', label: 'Linha Essenciais' },
   ];
 
-  const filteredMaterials = siteConfig.materials.filter((mat) => {
-    const matchesCategory = selectedCategory === 'all' || mat.category === selectedCategory;
-    const matchesSearch = mat.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                          mat.subtitle.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                          mat.description.toLowerCase().includes(searchQuery.toLowerCase());
-    return matchesCategory && matchesSearch;
-  });
+  // Filtragem
+  const filteredMaterials = useMemo(() => {
+    return siteConfig.materials.filter((mat) => {
+      const matchesCategory = selectedCategory === 'all' || mat.category === selectedCategory;
+      const matchesSearch = mat.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                            mat.subtitle.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                            mat.description.toLowerCase().includes(searchQuery.toLowerCase());
+      return matchesCategory && matchesSearch;
+    });
+  }, [selectedCategory, searchQuery]);
+
+  // Paginação
+  const totalPages = Math.ceil(filteredMaterials.length / itemsPerPage);
+
+  const paginatedMaterials = useMemo(() => {
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    return filteredMaterials.slice(startIndex, startIndex + itemsPerPage);
+  }, [filteredMaterials, currentPage, itemsPerPage]);
+
+  const handleCategoryChange = (catId: string) => {
+    setSelectedCategory(catId);
+    setCurrentPage(1);
+  };
+
+  const handleSearchChange = (query: string) => {
+    setSearchQuery(query);
+    setCurrentPage(1);
+  };
+
+  const goToPage = (pageNumber: number) => {
+    setCurrentPage(pageNumber);
+    const catalogElement = document.getElementById('materiais');
+    if (catalogElement) {
+      catalogElement.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
 
   const getWhatsappMaterialUrl = (materialName: string) => {
     const text = encodeURIComponent(
@@ -39,35 +71,35 @@ export const MaterialsSection: React.FC = () => {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 relative z-10">
         
-        {/* Header da Seção Estilo Catálogo de Luxo (Como Imagens 2 e 3) */}
+        {/* Header do Catálogo Unificado */}
         <div className="text-center max-w-3xl mx-auto mb-12 space-y-4">
           <div className="inline-flex items-center gap-2 px-4 py-1 bg-black/60 border border-[#D4AF37]/40 rounded-full">
             <Sparkles className="w-3.5 h-3.5 text-[#D4AF37]" />
             <span className="text-[10px] sm:text-xs uppercase tracking-[0.25em] text-[#F7E7AD] font-semibold">
-              CATÁLOGO PREMIUM DE PEDRAS NOBRES & EXÓTICAS
+              CATÁLOGO UNIFICADO STONE GRAN LUX ({siteConfig.materials.length} PEDRAS NOBRES)
             </span>
           </div>
 
           <h2 className="font-serif text-3xl sm:text-5xl font-light leading-tight tracking-tight text-white">
-            COLEÇÃO EXCLUSIVA <br />
+            COLEÇÃO COMPLETA DE <br />
             <span className="font-normal italic text-transparent bg-clip-text bg-gradient-to-r from-[#F7E7AD] via-[#D4AF37] to-[#C5A059]">
-              STONE GRAN LUX
+              PEDRAS EXÓTICAS & NACIONAIS
             </span>
           </h2>
 
           <p className="text-sm text-gray-300 font-light leading-relaxed max-w-2xl mx-auto">
-            Pedras selecionadas à mão diretamente das melhores jazidas do Brasil, Itália, Pérsia e Guatemala. Conheça as 10 pedras mais nobres e desejadas pela alta arquitetura.
+            Navegue por todo o nosso acervo de rochas selecionadas à mão. Utilize os filtros de categoria e a paginação abaixo para explorar com conforto.
           </p>
         </div>
 
         {/* Filtros e Barra de Pesquisa */}
-        <div className="flex flex-col md:flex-row items-center justify-between gap-4 mb-12 bg-black/60 p-4 border border-[#D4AF37]/30 rounded-sm">
+        <div className="flex flex-col md:flex-row items-center justify-between gap-4 mb-10 bg-black/80 p-4 border border-[#D4AF37]/30 rounded-sm shadow-xl">
           {/* Tabs de Categoria */}
           <div className="flex items-center gap-2 overflow-x-auto w-full md:w-auto pb-2 md:pb-0 no-scrollbar">
             {categories.map((cat) => (
               <button
                 key={cat.id}
-                onClick={() => setSelectedCategory(cat.id)}
+                onClick={() => handleCategoryChange(cat.id)}
                 className={`px-4 py-2 text-xs uppercase tracking-[0.15em] font-medium whitespace-nowrap transition-all duration-300 border ${
                   selectedCategory === cat.id
                     ? 'bg-gradient-to-r from-[#F7E7AD] via-[#D4AF37] to-[#AA822A] text-black border-[#D4AF37] shadow-[0_0_15px_rgba(212,175,55,0.4)]'
@@ -84,121 +116,192 @@ export const MaterialsSection: React.FC = () => {
             <Search className="w-4 h-4 text-[#D4AF37] absolute left-3 top-1/2 -translate-y-1/2" />
             <input
               type="text"
-              placeholder="Buscar pedra..."
+              placeholder="Buscar por nome..."
               value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-9 pr-4 py-2 bg-black/80 border border-white/20 focus:border-[#D4AF37] text-xs text-white placeholder-gray-500 focus:outline-none transition-colors"
+              onChange={(e) => handleSearchChange(e.target.value)}
+              className="w-full pl-9 pr-4 py-2 bg-black border border-white/20 focus:border-[#D4AF37] text-xs text-white placeholder-gray-500 focus:outline-none transition-colors"
             />
           </div>
         </div>
 
-        {/* Grid de Pedras - Layout de Placas/Slabs de Luxo (Como nas imagens anexadas) */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {filteredMaterials.map((mat) => (
-            <div
-              key={mat.id}
-              className="group bg-[#121215] border border-[#D4AF37]/30 hover:border-[#D4AF37] transition-all duration-500 flex flex-col justify-between overflow-hidden shadow-2xl relative rounded-sm hover:-translate-y-1"
-            >
-              {/* Corner Motifs (Luxury Frame Effect like Catalog Images 2 & 3) */}
-              <div className="absolute top-0 left-0 w-3 h-3 border-t-2 border-l-2 border-[#D4AF37] z-20" />
-              <div className="absolute top-0 right-0 w-3 h-3 border-t-2 border-r-2 border-[#D4AF37] z-20" />
-              <div className="absolute bottom-0 left-0 w-3 h-3 border-b-2 border-l-2 border-[#D4AF37] z-20" />
-              <div className="absolute bottom-0 right-0 w-3 h-3 border-b-2 border-r-2 border-[#D4AF37] z-20" />
-
-              <div>
-                {/* Image Container with Zoom & Badge */}
-                <div className="relative aspect-[16/10] img-zoom-container bg-black overflow-hidden cursor-pointer" onClick={() => setActiveModalMaterial(mat)}>
-                  <img
-                    src={mat.image}
-                    alt={`Pedra Nobre Stone Gran Lux - ${mat.name}`}
-                    className="w-full h-full object-cover"
-                    loading="lazy"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent opacity-70 group-hover:opacity-40 transition-opacity" />
-                  
-                  {/* Badge de Raraidade / Categoria */}
-                  <span className="absolute top-3 left-3 text-[10px] font-bold uppercase tracking-widest text-black bg-gradient-to-r from-[#F7E7AD] to-[#D4AF37] px-2.5 py-1 shadow-md">
-                    {mat.specs.rarity}
-                  </span>
-
-                  {/* Icon view overlay */}
-                  <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-black/40 backdrop-blur-xs">
-                    <span className="inline-flex items-center gap-2 px-4 py-2 bg-black/80 border border-[#D4AF37] text-[#F7E7AD] text-xs uppercase tracking-widest">
-                      <Eye className="w-4 h-4 text-[#D4AF37]" />
-                      Ver Detalhes da Chapa
-                    </span>
-                  </div>
-
-                  {/* Tag do Nome no Fundo da Imagem */}
-                  <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between">
-                    <span className="font-serif text-lg font-bold tracking-wider text-white drop-shadow-md">
-                      {mat.name}
-                    </span>
-                    <span className="text-[10px] text-[#D4AF37] font-mono uppercase bg-black/60 px-2 py-0.5 border border-[#D4AF37]/30">
-                      {mat.specs.thickness}
-                    </span>
-                  </div>
-                </div>
-
-                {/* Conteúdo do Card */}
-                <div className="p-6 space-y-4">
-                  <p className="text-xs uppercase tracking-wider text-[#D4AF37] font-medium border-b border-white/10 pb-2">
-                    {mat.subtitle}
-                  </p>
-                  
-                  <p className="text-xs text-gray-300 font-light leading-relaxed line-clamp-3">
-                    {mat.description}
-                  </p>
-
-                  {/* Especificações Rápidas */}
-                  <div className="grid grid-cols-2 gap-2 text-[11px] bg-black/50 p-2.5 border border-white/5 rounded-xs">
-                    <div>
-                      <span className="text-gray-400 block text-[9px] uppercase">Origem</span>
-                      <span className="text-white font-medium truncate block">{mat.specs.origin}</span>
-                    </div>
-                    <div>
-                      <span className="text-gray-400 block text-[9px] uppercase">Acabamento</span>
-                      <span className="text-white font-medium truncate block">{mat.specs.finish}</span>
-                    </div>
-                  </div>
-
-                  {/* Features */}
-                  <div className="space-y-1.5 pt-2">
-                    {mat.features.map((feat, idx) => (
-                      <div key={idx} className="flex items-center gap-2 text-[11px] text-gray-300">
-                        <span className="w-1.5 h-1.5 rounded-full bg-[#D4AF37]" />
-                        <span>{feat}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-
-              {/* Botão de Cotação Instantânea no WhatsApp */}
-              <div className="p-6 pt-0 space-y-2">
-                <a
-                  href={getWhatsappMaterialUrl(mat.name)}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-full py-3 px-4 bg-gradient-to-r from-[#F7E7AD] via-[#D4AF37] to-[#AA822A] hover:from-[#FFF0BF] hover:to-[#C5A059] text-black font-bold text-xs uppercase tracking-[0.15em] flex items-center justify-between group/btn shadow-[0_0_15px_rgba(212,175,55,0.2)] transition-all duration-300"
-                >
-                  <span className="flex items-center gap-2">
-                    <MessageCircle className="w-4 h-4 fill-black text-black" />
-                    Cotar {mat.name}
-                  </span>
-                  <ArrowUpRight className="w-4 h-4 text-black group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform" />
-                </a>
-
-                <button
-                  onClick={() => setActiveModalMaterial(mat)}
-                  className="w-full py-2 bg-black/60 hover:bg-black text-gray-300 hover:text-[#D4AF37] text-[10px] uppercase tracking-widest border border-white/10 transition-colors"
-                >
-                  Ver Ficha Técnica Completa
-                </button>
-              </div>
-            </div>
-          ))}
+        {/* Status de Exibição */}
+        <div className="flex items-center justify-between text-xs text-gray-400 mb-6 px-1">
+          <span>
+            Exibindo <strong className="text-[#F7E7AD]">{filteredMaterials.length === 0 ? 0 : (currentPage - 1) * itemsPerPage + 1}</strong> a <strong className="text-[#F7E7AD]">{Math.min(currentPage * itemsPerPage, filteredMaterials.length)}</strong> de <strong className="text-[#F7E7AD]">{filteredMaterials.length}</strong> pedras encontradas
+          </span>
+          {totalPages > 1 && (
+            <span className="font-mono">Página {currentPage} de {totalPages}</span>
+          )}
         </div>
+
+        {/* Grid de Pedras */}
+        {paginatedMaterials.length === 0 ? (
+          <div className="text-center py-16 bg-[#121215] border border-white/10 p-8 space-y-3">
+            <p className="font-serif text-xl text-gray-300">Nenhuma pedra encontrada para a busca "{searchQuery}"</p>
+            <button
+              onClick={() => { handleCategoryChange('all'); setSearchQuery(''); }}
+              className="px-6 py-2 bg-[#D4AF37] text-black font-bold text-xs uppercase tracking-widest"
+            >
+              Limpar Filtros
+            </button>
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+            {paginatedMaterials.map((mat) => (
+              <div
+                key={mat.id}
+                className="group bg-[#121215] border border-[#D4AF37]/30 hover:border-[#D4AF37] transition-all duration-500 flex flex-col justify-between overflow-hidden shadow-2xl relative rounded-sm hover:-translate-y-1"
+              >
+                {/* Corner Motifs */}
+                <div className="absolute top-0 left-0 w-3 h-3 border-t-2 border-l-2 border-[#D4AF37] z-20" />
+                <div className="absolute top-0 right-0 w-3 h-3 border-t-2 border-r-2 border-[#D4AF37] z-20" />
+                <div className="absolute bottom-0 left-0 w-3 h-3 border-b-2 border-l-2 border-[#D4AF37] z-20" />
+                <div className="absolute bottom-0 right-0 w-3 h-3 border-b-2 border-r-2 border-[#D4AF37] z-20" />
+
+                <div>
+                  {/* Image Container with Zoom & Badge */}
+                  <div
+                    className="relative aspect-[16/10] img-zoom-container bg-black overflow-hidden cursor-pointer"
+                    onClick={() => setActiveModalMaterial(mat)}
+                  >
+                    <img
+                      src={mat.image}
+                      alt={`Pedra Nobre Stone Gran Lux - ${mat.name}`}
+                      className="w-full h-full object-cover"
+                      loading="lazy"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent opacity-70 group-hover:opacity-40 transition-opacity" />
+                    
+                    {/* Badge de Status / Raraidade */}
+                    <span className="absolute top-3 left-3 text-[10px] font-bold uppercase tracking-widest text-black bg-gradient-to-r from-[#F7E7AD] to-[#D4AF37] px-2.5 py-1 shadow-md">
+                      {mat.specs.rarity}
+                    </span>
+
+                    {/* Overlay de Ampliação */}
+                    <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-black/40 backdrop-blur-xs">
+                      <span className="inline-flex items-center gap-2 px-4 py-2 bg-black/80 border border-[#D4AF37] text-[#F7E7AD] text-xs uppercase tracking-widest">
+                        <Eye className="w-4 h-4 text-[#D4AF37]" />
+                        Ver Ficha Completa
+                      </span>
+                    </div>
+
+                    {/* Tag do Nome */}
+                    <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between">
+                      <span className="font-serif text-lg font-bold tracking-wider text-white drop-shadow-md">
+                        {mat.name}
+                      </span>
+                      <span className="text-[10px] text-[#D4AF37] font-mono uppercase bg-black/60 px-2 py-0.5 border border-[#D4AF37]/30">
+                        {mat.specs.thickness}
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Conteúdo do Card */}
+                  <div className="p-6 space-y-4">
+                    <p className="text-xs uppercase tracking-wider text-[#D4AF37] font-medium border-b border-white/10 pb-2">
+                      {mat.subtitle}
+                    </p>
+                    
+                    <p className="text-xs text-gray-300 font-light leading-relaxed line-clamp-3">
+                      {mat.description}
+                    </p>
+
+                    {/* Especificações Rápidas */}
+                    <div className="grid grid-cols-2 gap-2 text-[11px] bg-black/50 p-2.5 border border-white/5 rounded-xs">
+                      <div>
+                        <span className="text-gray-400 block text-[9px] uppercase">Origem</span>
+                        <span className="text-white font-medium truncate block">{mat.specs.origin}</span>
+                      </div>
+                      <div>
+                        <span className="text-gray-400 block text-[9px] uppercase">Acabamento</span>
+                        <span className="text-white font-medium truncate block">{mat.specs.finish}</span>
+                      </div>
+                    </div>
+
+                    {/* Features */}
+                    <div className="space-y-1.5 pt-2">
+                      {mat.features.slice(0, 2).map((feat, idx) => (
+                        <div key={idx} className="flex items-center gap-2 text-[11px] text-gray-300">
+                          <span className="w-1.5 h-1.5 rounded-full bg-[#D4AF37]" />
+                          <span className="truncate">{feat}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
+                {/* Botão de Cotação */}
+                <div className="p-6 pt-0 space-y-2">
+                  <a
+                    href={getWhatsappMaterialUrl(mat.name)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full py-3 px-4 bg-gradient-to-r from-[#F7E7AD] via-[#D4AF37] to-[#AA822A] hover:from-[#FFF0BF] hover:to-[#C5A059] text-black font-bold text-xs uppercase tracking-[0.15em] flex items-center justify-between group/btn shadow-[0_0_15px_rgba(212,175,55,0.2)] transition-all duration-300"
+                  >
+                    <span className="flex items-center gap-2">
+                      <MessageCircle className="w-4 h-4 fill-black text-black" />
+                      Cotar {mat.name}
+                    </span>
+                    <ArrowUpRight className="w-4 h-4 text-black group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform" />
+                  </a>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+
+        {/* Paginação do Catálogo (Página 1, Página 2, ...) */}
+        {totalPages > 1 && (
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-6 border-t border-[#D4AF37]/30">
+            {/* Botão Anterior */}
+            <button
+              onClick={() => goToPage(currentPage - 1)}
+              disabled={currentPage === 1}
+              className={`px-4 py-2.5 text-xs font-bold uppercase tracking-widest flex items-center gap-2 border transition-all ${
+                currentPage === 1
+                  ? 'bg-black/40 text-gray-600 border-white/5 cursor-not-allowed'
+                  : 'bg-black text-[#D4AF37] border-[#D4AF37]/50 hover:border-[#D4AF37] hover:bg-[#D4AF37] hover:text-black'
+              }`}
+            >
+              <ChevronLeft className="w-4 h-4" />
+              Anterior
+            </button>
+
+            {/* Números das Páginas */}
+            <div className="flex items-center gap-2">
+              {[...Array(totalPages)].map((_, i) => {
+                const pageNum = i + 1;
+                return (
+                  <button
+                    key={pageNum}
+                    onClick={() => goToPage(pageNum)}
+                    className={`w-10 h-10 text-xs font-bold font-mono transition-all border ${
+                      currentPage === pageNum
+                        ? 'bg-gradient-to-r from-[#F7E7AD] via-[#D4AF37] to-[#AA822A] text-black border-[#D4AF37] shadow-[0_0_15px_rgba(212,175,55,0.4)]'
+                        : 'bg-black/60 text-gray-400 border-white/10 hover:border-[#D4AF37]/50 hover:text-white'
+                    }`}
+                  >
+                    {pageNum}
+                  </button>
+                );
+              })}
+            </div>
+
+            {/* Botão Próximo */}
+            <button
+              onClick={() => goToPage(currentPage + 1)}
+              disabled={currentPage === totalPages}
+              className={`px-4 py-2.5 text-xs font-bold uppercase tracking-widest flex items-center gap-2 border transition-all ${
+                currentPage === totalPages
+                  ? 'bg-black/40 text-gray-600 border-white/5 cursor-not-allowed'
+                  : 'bg-black text-[#D4AF37] border-[#D4AF37]/50 hover:border-[#D4AF37] hover:bg-[#D4AF37] hover:text-black'
+              }`}
+            >
+              Próxima
+              <ChevronRight className="w-4 h-4" />
+            </button>
+          </div>
+        )}
 
       </div>
 
