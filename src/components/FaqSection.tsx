@@ -15,27 +15,27 @@ export const FaqSection: React.FC = () => {
   };
 
   return (
-    <section id="faq" className="py-24 md:py-32 bg-white text-black relative overflow-hidden border-t border-b border-neutral-200">
+    <section id="faq" className="py-24 md:py-32 bg-[#0A0A0C] text-white relative overflow-hidden border-t border-[#D4AF37]/30">
       
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-12 relative z-10">
         
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
-          <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#FAF6E9] border border-[#D4AF37]/30 rounded-full">
-            <HelpCircle className="w-3.5 h-3.5 text-[#B89334]" />
-            <span className="text-[10px] uppercase tracking-[0.25em] text-[#9E7C1D] font-bold">
+          <div className="inline-flex items-center gap-2 px-4 py-1 bg-black/80 border border-[#D4AF37]/40 rounded-full">
+            <HelpCircle className="w-3.5 h-3.5 text-[#D4AF37]" />
+            <span className="text-[10px] sm:text-xs uppercase tracking-[0.25em] text-[#F7E7AD] font-semibold">
               TIRE SUAS DÚVIDAS
             </span>
           </div>
 
-          <h2 className="font-serif text-3xl sm:text-5xl font-light leading-tight tracking-tight text-neutral-900">
+          <h2 className="font-serif text-3xl sm:text-5xl font-light leading-tight tracking-tight text-white">
             PERGUNTAS FREQUENTES <br />
-            <span className="font-semibold text-transparent bg-clip-text bg-gradient-to-r from-[#B89334] via-[#D4AF37] to-[#8A6D23]">
+            <span className="font-normal italic text-transparent bg-clip-text bg-gradient-to-r from-[#F7E7AD] via-[#D4AF37] to-[#C5A059]">
               SOBRE NOSSAS PEDRAS & SERVIÇOS
             </span>
           </h2>
 
-          <p className="text-sm text-neutral-600 font-light leading-relaxed">
+          <p className="text-sm text-gray-300 font-light leading-relaxed">
             Esclareça os principais pontos sobre durabilidade, prazos de entrega, medição 3D e processo de impermeabilização.
           </p>
         </div>
@@ -45,25 +45,25 @@ export const FaqSection: React.FC = () => {
           {siteConfig.faqs.map((faq, idx) => (
             <div
               key={idx}
-              className="bg-neutral-50 border border-neutral-200 hover:border-[#D4AF37] transition-all rounded-sm overflow-hidden"
+              className="bg-[#121215] border border-[#D4AF37]/30 hover:border-[#D4AF37] transition-all rounded-sm overflow-hidden"
             >
               <button
                 onClick={() => toggleFaq(idx)}
-                className="w-full p-6 text-left flex items-center justify-between gap-4 font-serif text-lg sm:text-xl font-bold text-neutral-900 hover:text-[#B89334] transition-colors"
+                className="w-full p-6 text-left flex items-center justify-between gap-4 font-serif text-lg sm:text-xl font-bold text-white hover:text-[#F7E7AD] transition-colors"
               >
                 <span className="flex items-center gap-3">
-                  <span className="text-[#B89334] font-mono text-sm">0{idx + 1}.</span>
+                  <span className="text-[#D4AF37] font-mono text-sm">0{idx + 1}.</span>
                   {faq.question}
                 </span>
                 <ChevronDown
-                  className={`w-5 h-5 text-[#B89334] shrink-0 transition-transform duration-300 ${
+                  className={`w-5 h-5 text-[#D4AF37] shrink-0 transition-transform duration-300 ${
                     openIndex === idx ? 'rotate-180' : ''
                   }`}
                 />
               </button>
 
               {openIndex === idx && (
-                <div className="px-6 pb-6 text-xs sm:text-sm text-neutral-600 font-light leading-relaxed border-t border-neutral-200 pt-4 animate-fade-in">
+                <div className="px-6 pb-6 text-xs sm:text-sm text-gray-300 font-light leading-relaxed border-t border-white/5 pt-4 animate-fade-in">
                   {faq.answer}
                 </div>
               )}
@@ -72,7 +72,7 @@ export const FaqSection: React.FC = () => {
         </div>
 
         {/* Floating WhatsApp Help Line */}
-        <div className="mt-12 text-center bg-neutral-900 text-white p-6 border border-[#D4AF37] rounded-sm space-y-3 shadow-md">
+        <div className="mt-12 text-center bg-black/60 p-6 border border-[#D4AF37]/40 rounded-sm space-y-3">
           <p className="font-serif text-lg text-white">Possui alguma dúvida técnica não listada?</p>
           <a
             href={getWhatsappUrl()}

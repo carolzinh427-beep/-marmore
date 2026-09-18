@@ -34,7 +34,7 @@ export const ContactSection: React.FC = () => {
   };
 
   return (
-    <section id="contato" className="py-24 md:py-32 bg-white text-black border-t border-b border-neutral-200 relative overflow-hidden">
+    <section id="contato" className="py-24 md:py-32 bg-[#0A0A0C] text-white border-t border-b border-[#D4AF37]/30 relative overflow-hidden">
       
       {/* Decorative Top Accent Bar */}
       <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-[#D4AF37] to-transparent" />
@@ -43,16 +43,16 @@ export const ContactSection: React.FC = () => {
         
         {/* Cabeçalho */}
         <div className="max-w-3xl mb-16 space-y-3">
-          <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#FAF6E9] border border-[#D4AF37]/30 rounded-full">
-            <Sparkles className="w-3.5 h-3.5 text-[#B89334]" />
-            <span className="text-[10px] uppercase tracking-[0.25em] text-[#9E7C1D] font-bold">
+          <div className="inline-flex items-center gap-2 px-4 py-1 bg-black/80 border border-[#D4AF37]/40 rounded-full">
+            <Sparkles className="w-3.5 h-3.5 text-[#D4AF37]" />
+            <span className="text-[10px] sm:text-xs uppercase tracking-[0.25em] text-[#F7E7AD] font-semibold">
               SOLICITAÇÃO DE ORÇAMENTO & CONSULTORIA VIP
             </span>
           </div>
 
-          <h2 className="font-serif text-3xl sm:text-5xl font-light leading-tight tracking-tight text-neutral-900">
+          <h2 className="font-serif text-3xl sm:text-5xl font-light leading-tight tracking-tight text-white">
             FALE COM NOSSOS ENGENHEIROS & <br />
-            <span className="font-semibold text-transparent bg-clip-text bg-gradient-to-r from-[#B89334] via-[#D4AF37] to-[#8A6D23]">
+            <span className="font-normal italic text-transparent bg-clip-text bg-gradient-to-r from-[#F7E7AD] via-[#D4AF37] to-[#C5A059]">
               RECEBA SEU PROJETO EM ATÉ 24H
             </span>
           </h2>
@@ -63,15 +63,15 @@ export const ContactSection: React.FC = () => {
           {/* Lado Esquerdo: Cards de Informações de Contato */}
           <div className="lg:col-span-5 space-y-8">
             
-            <div className="bg-neutral-50 border border-neutral-200 p-8 space-y-6 shadow-sm rounded-sm">
-              <h3 className="font-serif text-2xl font-bold text-neutral-900">Atendimento Exclusivo Stone Gran Lux</h3>
+            <div className="bg-[#121215] border border-[#D4AF37]/40 p-8 space-y-6 shadow-2xl rounded-sm">
+              <h3 className="font-serif text-2xl font-bold text-white">Atendimento Exclusivo Stone Gran Lux</h3>
               
               <div className="space-y-4">
                 <a
                   href={`https://wa.me/${siteConfig.whatsappNumber}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-start gap-4 p-4 bg-gradient-to-r from-[#F7E7AD] via-[#D4AF37] to-[#AA822A] text-black transition-transform hover:scale-[1.02] shadow-md font-bold rounded-xs"
+                  className="flex items-start gap-4 p-4 bg-gradient-to-r from-[#F7E7AD] via-[#D4AF37] to-[#AA822A] text-black transition-transform hover:scale-[1.02] shadow-[0_0_20px_rgba(212,175,55,0.3)] font-bold rounded-xs"
                 >
                   <MessageCircle className="w-6 h-6 fill-black text-black shrink-0 mt-0.5" />
                   <div>
@@ -80,11 +80,11 @@ export const ContactSection: React.FC = () => {
                   </div>
                 </a>
 
-                <div className="flex items-start gap-4 p-4 bg-white border border-neutral-200 rounded-xs">
-                  <Phone className="w-5 h-5 text-[#B89334] shrink-0 mt-0.5" />
+                <div className="flex items-start gap-4 p-4 bg-black/60 border border-white/10 rounded-xs">
+                  <Phone className="w-5 h-5 text-[#D4AF37] shrink-0 mt-0.5" />
                   <div>
-                    <span className="text-[10px] uppercase tracking-wider text-neutral-500 block">Central de Vendas</span>
-                    <span className="font-semibold text-sm text-neutral-900">{siteConfig.phone}</span>
+                    <span className="text-[10px] uppercase tracking-wider text-gray-400 block">Central de Vendas</span>
+                    <span className="font-semibold text-sm text-white">{siteConfig.phone}</span>
                   </div>
                 </div>
 
@@ -92,35 +92,35 @@ export const ContactSection: React.FC = () => {
                   href={siteConfig.instagramUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-start gap-4 p-4 bg-white border border-neutral-200 hover:border-[#D4AF37] transition-colors rounded-xs"
+                  className="flex items-start gap-4 p-4 bg-black/60 border border-white/10 hover:border-[#D4AF37] transition-colors rounded-xs"
                 >
-                  <InstagramIcon className="w-5 h-5 text-[#B89334] shrink-0 mt-0.5" />
+                  <InstagramIcon className="w-5 h-5 text-[#D4AF37] shrink-0 mt-0.5" />
                   <div>
-                    <span className="text-[10px] uppercase tracking-wider text-neutral-500 block">Instagram de Obras</span>
-                    <span className="font-semibold text-sm text-neutral-900">{siteConfig.instagram}</span>
+                    <span className="text-[10px] uppercase tracking-wider text-gray-400 block">Instagram de Obras</span>
+                    <span className="font-semibold text-sm text-white">{siteConfig.instagram}</span>
                   </div>
                 </a>
 
-                <div className="flex items-start gap-4 p-4 bg-white border border-neutral-200 rounded-xs">
-                  <MapPin className="w-5 h-5 text-[#B89334] shrink-0 mt-0.5" />
+                <div className="flex items-start gap-4 p-4 bg-black/60 border border-white/10 rounded-xs">
+                  <MapPin className="w-5 h-5 text-[#D4AF37] shrink-0 mt-0.5" />
                   <div>
-                    <span className="text-[10px] uppercase tracking-wider text-neutral-500 block">Showroom Principal</span>
-                    <span className="font-semibold text-sm text-neutral-900 block">{siteConfig.fullAddress}</span>
+                    <span className="text-[10px] uppercase tracking-wider text-gray-400 block">Showroom Principal</span>
+                    <span className="font-semibold text-sm text-white block">{siteConfig.fullAddress}</span>
                   </div>
                 </div>
 
-                <div className="flex items-start gap-4 p-4 bg-white border border-neutral-200 rounded-xs">
-                  <Clock className="w-5 h-5 text-[#B89334] shrink-0 mt-0.5" />
+                <div className="flex items-start gap-4 p-4 bg-black/60 border border-white/10 rounded-xs">
+                  <Clock className="w-5 h-5 text-[#D4AF37] shrink-0 mt-0.5" />
                   <div>
-                    <span className="text-[10px] uppercase tracking-wider text-neutral-500 block">Horário de Funcionamento</span>
-                    <span className="font-semibold text-xs text-neutral-800 block">{siteConfig.hours}</span>
+                    <span className="text-[10px] uppercase tracking-wider text-gray-400 block">Horário de Funcionamento</span>
+                    <span className="font-semibold text-xs text-gray-300 block">{siteConfig.hours}</span>
                   </div>
                 </div>
               </div>
             </div>
 
             {/* Google Maps Embed iframe */}
-            <div className="bg-neutral-100 border border-neutral-200 p-2 aspect-[16/9] shadow-sm overflow-hidden rounded-sm">
+            <div className="bg-[#121215] border border-[#D4AF37]/30 p-2 aspect-[16/9] shadow-2xl overflow-hidden rounded-sm">
               <iframe
                 title="Mapa de Localização Stone Gran Lux"
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3657.197587842618!2d-46.67139192377402!3d-23.56134886161286!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ce59d3d376813b%3A0x8bb8c8c5c3789b70!2sAv.%20Europa%2C%201420%20-%20Jardins%2C%20S%C3%A3o%20Paulo%20-%20SP!5e0!3m2!1spt-BR!2sbr!4v1700000000000!5m2!1spt-BR!2sbr"
@@ -137,7 +137,7 @@ export const ContactSection: React.FC = () => {
           </div>
 
           {/* Lado Direito: Formulário Inteligente */}
-          <div className="lg:col-span-7 bg-neutral-900 border-2 border-[#D4AF37] p-8 md:p-10 shadow-2xl text-white space-y-6 rounded-sm">
+          <div className="lg:col-span-7 bg-[#121215] border-2 border-[#D4AF37] p-8 md:p-10 shadow-2xl text-white space-y-6 rounded-sm">
             <div>
               <span className="text-[10px] uppercase tracking-[0.2em] text-[#D4AF37] font-bold block mb-1">
                 FORMULÁRIO DE ORÇAMENTO RÁPIDO
