@@ -1,98 +1,286 @@
-import React from 'react';
-import { ArrowUpRight, CheckCircle2 } from 'lucide-react';
-import { siteConfig } from '../config/site';
+import React, { useState } from 'react';
+import { ArrowUpRight, Search, Sparkles, MessageCircle, Eye, ShieldCheck, Filter } from 'lucide-react';
+import { siteConfig, MaterialItem } from '../config/site';
 
 export const MaterialsSection: React.FC = () => {
+  const [selectedCategory, setSelectedCategory] = useState<string>('all');
+  const [searchQuery, setSearchQuery] = useState<string>('');
+  const [activeModalMaterial, setActiveModalMaterial] = useState<MaterialItem | null>(null);
+
+  const categories = [
+    { id: 'all', label: 'Todas as Pedras' },
+    { id: 'onix', label: 'Ônix Translúcidos' },
+    { id: 'exoticos', label: 'Granitos Exóticos Luxo' },
+    { id: 'quartzitos', label: 'Quartzitos Nobres' },
+    { id: 'marmores', label: 'Mármores Selecionados' },
+    { id: 'granitos', label: 'Linha Essenciais' },
+  ];
+
+  const filteredMaterials = siteConfig.materials.filter((mat) => {
+    const matchesCategory = selectedCategory === 'all' || mat.category === selectedCategory;
+    const matchesSearch = mat.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                          mat.subtitle.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                          mat.description.toLowerCase().includes(searchQuery.toLowerCase());
+    return matchesCategory && matchesSearch;
+  });
+
   const getWhatsappMaterialUrl = (materialName: string) => {
     const text = encodeURIComponent(
-      `Olá! Tenho interesse no material *${materialName}* para o meu projeto. Poderia me enviar mais informações e orçamento?`
+      `Olá Stone Gran Lux! Gostaria de consultar um orçamento exclusivo para a pedra *${materialName}* para o meu projeto.`
     );
     return `https://wa.me/${siteConfig.whatsappNumber}?text=${text}`;
   };
 
   return (
-    <section id="materiais" className="py-24 md:py-32 bg-[#FBF9F5] text-[#242320]">
-      <div className="max-w-7xl mx-auto px-6 md:px-12">
+    <section id="materiais" className="py-24 md:py-32 bg-[#0A0A0C] text-white relative overflow-hidden border-t border-[#D4AF37]/20">
+      
+      {/* Subtle Marble Texture Glow in Background */}
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(212,175,55,0.08),transparent_50%)] pointer-events-none" />
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 relative z-10">
         
-        {/* Cabeçalho da Seção */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-8 pb-8 border-b border-[#EAE6DD]">
-          <div className="max-w-2xl">
-            <span className="text-xs uppercase tracking-[0.25em] text-[#A88B63] font-semibold block mb-3">
-              Seleção Exclusiva de Rochas
+        {/* Header da Seção Estilo Catálogo de Luxo (Como Imagens 2 e 3) */}
+        <div className="text-center max-w-3xl mx-auto mb-12 space-y-4">
+          <div className="inline-flex items-center gap-2 px-4 py-1 bg-black/60 border border-[#D4AF37]/40 rounded-full">
+            <Sparkles className="w-3.5 h-3.5 text-[#D4AF37]" />
+            <span className="text-[10px] sm:text-xs uppercase tracking-[0.25em] text-[#F7E7AD] font-semibold">
+              CATÁLOGO PREMIUM DE PEDRAS NOBRES & EXÓTICAS
             </span>
-            <h2 className="font-serif text-3xl sm:text-5xl font-light leading-tight tracking-tight">
-              MATERIAIS QUE <br />
-              <span className="font-normal italic">VALORIZAM</span> SEU PROJETO.
-            </h2>
           </div>
-          <p className="text-sm md:text-base text-gray-600 max-w-md font-light leading-relaxed">
-            Selecionamos materiais que combinam estética, alta resistência e personalidade para cada ambiente da sua residência ou empresa.
+
+          <h2 className="font-serif text-3xl sm:text-5xl font-light leading-tight tracking-tight text-white">
+            COLEÇÃO EXCLUSIVA <br />
+            <span className="font-normal italic text-transparent bg-clip-text bg-gradient-to-r from-[#F7E7AD] via-[#D4AF37] to-[#C5A059]">
+              STONE GRAN LUX
+            </span>
+          </h2>
+
+          <p className="text-sm text-gray-300 font-light leading-relaxed max-w-2xl mx-auto">
+            Pedras selecionadas à mão diretamente das melhores jazidas do Brasil, Itália, Pérsia e Guatemala. Conheça as 10 pedras mais nobres e desejadas pela alta arquitetura.
           </p>
         </div>
 
-        {/* Grid de Materiais */}
+        {/* Filtros e Barra de Pesquisa */}
+        <div className="flex flex-col md:flex-row items-center justify-between gap-4 mb-12 bg-black/60 p-4 border border-[#D4AF37]/30 rounded-sm">
+          {/* Tabs de Categoria */}
+          <div className="flex items-center gap-2 overflow-x-auto w-full md:w-auto pb-2 md:pb-0 no-scrollbar">
+            {categories.map((cat) => (
+              <button
+                key={cat.id}
+                onClick={() => setSelectedCategory(cat.id)}
+                className={`px-4 py-2 text-xs uppercase tracking-[0.15em] font-medium whitespace-nowrap transition-all duration-300 border ${
+                  selectedCategory === cat.id
+                    ? 'bg-gradient-to-r from-[#F7E7AD] via-[#D4AF37] to-[#AA822A] text-black border-[#D4AF37] shadow-[0_0_15px_rgba(212,175,55,0.4)]'
+                    : 'bg-black/40 text-gray-400 border-white/10 hover:border-[#D4AF37]/50 hover:text-white'
+                }`}
+              >
+                {cat.label}
+              </button>
+            ))}
+          </div>
+
+          {/* Barra de Pesquisa */}
+          <div className="relative w-full md:w-64">
+            <Search className="w-4 h-4 text-[#D4AF37] absolute left-3 top-1/2 -translate-y-1/2" />
+            <input
+              type="text"
+              placeholder="Buscar pedra..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="w-full pl-9 pr-4 py-2 bg-black/80 border border-white/20 focus:border-[#D4AF37] text-xs text-white placeholder-gray-500 focus:outline-none transition-colors"
+            />
+          </div>
+        </div>
+
+        {/* Grid de Pedras - Layout de Placas/Slabs de Luxo (Como nas imagens anexadas) */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {siteConfig.materials.map((mat) => (
+          {filteredMaterials.map((mat) => (
             <div
               key={mat.id}
-              className="group bg-white border border-[#EAE6DD] hover:border-[#C5A880] transition-all duration-500 flex flex-col justify-between overflow-hidden shadow-sm hover:shadow-xl"
+              className="group bg-[#121215] border border-[#D4AF37]/30 hover:border-[#D4AF37] transition-all duration-500 flex flex-col justify-between overflow-hidden shadow-2xl relative rounded-sm hover:-translate-y-1"
             >
+              {/* Corner Motifs (Luxury Frame Effect like Catalog Images 2 & 3) */}
+              <div className="absolute top-0 left-0 w-3 h-3 border-t-2 border-l-2 border-[#D4AF37] z-20" />
+              <div className="absolute top-0 right-0 w-3 h-3 border-t-2 border-r-2 border-[#D4AF37] z-20" />
+              <div className="absolute bottom-0 left-0 w-3 h-3 border-b-2 border-l-2 border-[#D4AF37] z-20" />
+              <div className="absolute bottom-0 right-0 w-3 h-3 border-b-2 border-r-2 border-[#D4AF37] z-20" />
+
               <div>
-                {/* Image Container with Zoom */}
-                <div className="relative aspect-[4/3] img-zoom-container bg-[#F4F0E8] overflow-hidden">
+                {/* Image Container with Zoom & Badge */}
+                <div className="relative aspect-[16/10] img-zoom-container bg-black overflow-hidden cursor-pointer" onClick={() => setActiveModalMaterial(mat)}>
                   <img
                     src={mat.image}
-                    alt={`Marmoraria Marmoreli - ${mat.name}`}
+                    alt={`Pedra Nobre Stone Gran Lux - ${mat.name}`}
                     className="w-full h-full object-cover"
                     loading="lazy"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-60 group-hover:opacity-40 transition-opacity" />
-                  <span className="absolute bottom-4 left-4 font-serif text-xs tracking-widest text-white/90 uppercase bg-black/40 backdrop-blur-md px-3 py-1 border border-white/20">
-                    {mat.name}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent opacity-70 group-hover:opacity-40 transition-opacity" />
+                  
+                  {/* Badge de Raraidade / Categoria */}
+                  <span className="absolute top-3 left-3 text-[10px] font-bold uppercase tracking-widest text-black bg-gradient-to-r from-[#F7E7AD] to-[#D4AF37] px-2.5 py-1 shadow-md">
+                    {mat.specs.rarity}
                   </span>
+
+                  {/* Icon view overlay */}
+                  <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-black/40 backdrop-blur-xs">
+                    <span className="inline-flex items-center gap-2 px-4 py-2 bg-black/80 border border-[#D4AF37] text-[#F7E7AD] text-xs uppercase tracking-widest">
+                      <Eye className="w-4 h-4 text-[#D4AF37]" />
+                      Ver Detalhes da Chapa
+                    </span>
+                  </div>
+
+                  {/* Tag do Nome no Fundo da Imagem */}
+                  <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between">
+                    <span className="font-serif text-lg font-bold tracking-wider text-white drop-shadow-md">
+                      {mat.name}
+                    </span>
+                    <span className="text-[10px] text-[#D4AF37] font-mono uppercase bg-black/60 px-2 py-0.5 border border-[#D4AF37]/30">
+                      {mat.specs.thickness}
+                    </span>
+                  </div>
                 </div>
 
-                {/* Conteúdo Informativo */}
-                <div className="p-8 space-y-4">
-                  <h3 className="font-serif text-2xl font-light text-[#121110] group-hover:text-[#A88B63] transition-colors">
-                    {mat.name}
-                  </h3>
-                  <p className="text-xs uppercase tracking-wider text-[#A88B63] font-medium">
+                {/* Conteúdo do Card */}
+                <div className="p-6 space-y-4">
+                  <p className="text-xs uppercase tracking-wider text-[#D4AF37] font-medium border-b border-white/10 pb-2">
                     {mat.subtitle}
                   </p>
-                  <p className="text-sm text-gray-600 font-light leading-relaxed">
+                  
+                  <p className="text-xs text-gray-300 font-light leading-relaxed line-clamp-3">
                     {mat.description}
                   </p>
 
-                  {/* Bullet points de características */}
-                  <div className="pt-4 border-t border-[#F4F0E8] space-y-2">
-                    {mat.features.map((feature, idx) => (
-                      <div key={idx} className="flex items-center gap-2.5 text-xs text-gray-700">
-                        <CheckCircle2 className="w-3.5 h-3.5 text-[#C5A880] shrink-0" />
-                        <span>{feature}</span>
+                  {/* Especificações Rápidas */}
+                  <div className="grid grid-cols-2 gap-2 text-[11px] bg-black/50 p-2.5 border border-white/5 rounded-xs">
+                    <div>
+                      <span className="text-gray-400 block text-[9px] uppercase">Origem</span>
+                      <span className="text-white font-medium truncate block">{mat.specs.origin}</span>
+                    </div>
+                    <div>
+                      <span className="text-gray-400 block text-[9px] uppercase">Acabamento</span>
+                      <span className="text-white font-medium truncate block">{mat.specs.finish}</span>
+                    </div>
+                  </div>
+
+                  {/* Features */}
+                  <div className="space-y-1.5 pt-2">
+                    {mat.features.map((feat, idx) => (
+                      <div key={idx} className="flex items-center gap-2 text-[11px] text-gray-300">
+                        <span className="w-1.5 h-1.5 rounded-full bg-[#D4AF37]" />
+                        <span>{feat}</span>
                       </div>
                     ))}
                   </div>
                 </div>
               </div>
 
-              {/* Botão de Solicitação do Material no WhatsApp */}
-              <div className="p-8 pt-0">
+              {/* Botão de Cotação Instantânea no WhatsApp */}
+              <div className="p-6 pt-0 space-y-2">
                 <a
                   href={getWhatsappMaterialUrl(mat.name)}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-full py-3.5 px-4 bg-[#F4F0E8] hover:bg-[#121110] text-[#121110] hover:text-[#C5A880] transition-colors duration-300 text-xs uppercase tracking-[0.15em] font-medium flex items-center justify-between group/btn"
+                  className="w-full py-3 px-4 bg-gradient-to-r from-[#F7E7AD] via-[#D4AF37] to-[#AA822A] hover:from-[#FFF0BF] hover:to-[#C5A059] text-black font-bold text-xs uppercase tracking-[0.15em] flex items-center justify-between group/btn shadow-[0_0_15px_rgba(212,175,55,0.2)] transition-all duration-300"
                 >
-                  <span>Orçamento em {mat.name}</span>
-                  <ArrowUpRight className="w-4 h-4 text-[#A88B63] group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform" />
+                  <span className="flex items-center gap-2">
+                    <MessageCircle className="w-4 h-4 fill-black text-black" />
+                    Cotar {mat.name}
+                  </span>
+                  <ArrowUpRight className="w-4 h-4 text-black group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform" />
                 </a>
+
+                <button
+                  onClick={() => setActiveModalMaterial(mat)}
+                  className="w-full py-2 bg-black/60 hover:bg-black text-gray-300 hover:text-[#D4AF37] text-[10px] uppercase tracking-widest border border-white/10 transition-colors"
+                >
+                  Ver Ficha Técnica Completa
+                </button>
               </div>
             </div>
           ))}
         </div>
 
       </div>
+
+      {/* Modal de Detalhes da Pedra Selecionada */}
+      {activeModalMaterial && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/90 backdrop-blur-md animate-fade-in">
+          <div className="absolute inset-0" onClick={() => setActiveModalMaterial(null)} />
+          
+          <div className="relative z-10 bg-[#121215] border-2 border-[#D4AF37] w-full max-w-4xl max-h-[90vh] overflow-y-auto shadow-2xl p-6 sm:p-8 flex flex-col md:flex-row gap-8">
+            <button
+              onClick={() => setActiveModalMaterial(null)}
+              className="absolute top-4 right-4 z-20 px-3 py-1 bg-black text-[#D4AF37] border border-[#D4AF37] hover:bg-[#D4AF37] hover:text-black text-xs uppercase font-bold"
+            >
+              [X] Fechar
+            </button>
+
+            {/* Imagem no Modal */}
+            <div className="md:w-1/2 relative bg-black flex items-center justify-center border border-white/10">
+              <img
+                src={activeModalMaterial.image}
+                alt={activeModalMaterial.name}
+                className="w-full h-auto max-h-[450px] object-cover"
+              />
+              <span className="absolute bottom-3 left-3 bg-black/80 px-3 py-1 text-xs text-[#D4AF37] border border-[#D4AF37]">
+                {activeModalMaterial.specs.rarity}
+              </span>
+            </div>
+
+            {/* Detalhes do Modal */}
+            <div className="md:w-1/2 flex flex-col justify-between space-y-6">
+              <div>
+                <span className="text-[10px] uppercase tracking-[0.25em] text-[#D4AF37] font-semibold block mb-1">
+                  STONE GRAN LUX • PEDRA NOBRE
+                </span>
+                <h3 className="font-serif text-3xl font-bold text-white mb-2">
+                  {activeModalMaterial.name}
+                </h3>
+                <p className="text-xs uppercase tracking-wider text-gray-400 mb-4 border-b border-white/10 pb-3">
+                  {activeModalMaterial.subtitle}
+                </p>
+
+                <p className="text-xs sm:text-sm text-gray-300 font-light leading-relaxed mb-6">
+                  {activeModalMaterial.description}
+                </p>
+
+                <div className="grid grid-cols-2 gap-4 bg-black/70 p-4 border border-[#D4AF37]/30 text-xs mb-6">
+                  <div>
+                    <span className="text-gray-400 block text-[10px] uppercase">Origem da Rocha</span>
+                    <span className="text-white font-semibold">{activeModalMaterial.specs.origin}</span>
+                  </div>
+                  <div>
+                    <span className="text-gray-400 block text-[10px] uppercase">Acabamento</span>
+                    <span className="text-white font-semibold">{activeModalMaterial.specs.finish}</span>
+                  </div>
+                  <div>
+                    <span className="text-gray-400 block text-[10px] uppercase">Espessura Padrão</span>
+                    <span className="text-white font-semibold">{activeModalMaterial.specs.thickness}</span>
+                  </div>
+                  <div>
+                    <span className="text-gray-400 block text-[10px] uppercase">Status / Raraidade</span>
+                    <span className="text-[#D4AF37] font-semibold">{activeModalMaterial.specs.rarity}</span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="space-y-3">
+                <a
+                  href={getWhatsappMaterialUrl(activeModalMaterial.name)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full py-4 bg-gradient-to-r from-[#F7E7AD] via-[#D4AF37] to-[#AA822A] text-black font-bold text-xs uppercase tracking-[0.2em] flex items-center justify-center gap-3 shadow-[0_0_20px_rgba(212,175,55,0.4)]"
+                >
+                  <MessageCircle className="w-5 h-5 fill-black" />
+                  Solicitar Orçamento Desta Pedra no WhatsApp
+                </a>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      )}
+
     </section>
   );
 };

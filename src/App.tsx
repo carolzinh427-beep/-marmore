@@ -1,51 +1,63 @@
 import React from 'react';
 import { Header } from './components/Header';
 import { Hero } from './components/Hero';
+import { DifferentialsSection } from './components/DifferentialsSection';
 import { MaterialsSection } from './components/MaterialsSection';
 import { SolutionsSection } from './components/SolutionsSection';
+import { BudgetCalculator } from './components/BudgetCalculator';
 import { PortfolioSection } from './components/PortfolioSection';
 import { ProcessSection } from './components/ProcessSection';
-import { DifferentialsSection } from './components/DifferentialsSection';
 import { AboutSection } from './components/AboutSection';
-import { CtaBanner } from './components/CtaBanner';
+import { FaqSection } from './components/FaqSection';
+import { TestimonialsSection } from './components/TestimonialsSection';
 import { ContactSection } from './components/ContactSection';
+import { CtaBanner } from './components/CtaBanner';
 import { Footer } from './components/Footer';
 import { FloatingWhatsapp } from './components/FloatingWhatsapp';
 
 export const App: React.FC = () => {
   return (
-    <div className="min-h-screen bg-[#FBF9F5] text-[#242320] font-sans selection:bg-[#C5A880] selection:text-white">
-      {/* Header Fixo / Transparente */}
+    <div className="min-h-screen bg-black text-white font-sans selection:bg-[#D4AF37] selection:text-black overflow-x-hidden">
+      {/* Header Fixo Transparente / Dark Glass */}
       <Header />
 
-      {/* Seção Hero Imersiva */}
+      {/* 0. Hero Section: FUNDO PRETO (Mármore Nero com Veios Dourados + Logo Stone Gran Lux) */}
       <Hero />
 
-      {/* Seção Materiais */}
-      <MaterialsSection />
-
-      {/* Seção Soluções Arquitetônicas */}
-      <SolutionsSection />
-
-      {/* Portfólio Galeria Premium com Lightbox */}
-      <PortfolioSection />
-
-      {/* Processo de Trabalho em 5 Etapas */}
-      <ProcessSection />
-
-      {/* Diferenciais Editoriais */}
+      {/* 1. Diferenciais de Marca: FUNDO BRANCO */}
       <DifferentialsSection />
 
-      {/* Seção Sobre Nós Institucional */}
+      {/* 2. Catálogo Premium das 10 Pedras Solicitadas: FUNDO PRETO */}
+      <MaterialsSection />
+
+      {/* 3. Soluções Arquitetônicas & Aplicações: FUNDO BRANCO */}
+      <SolutionsSection />
+
+      {/* 4. Simulador de Orçamento Instantâneo: FUNDO PRETO */}
+      <BudgetCalculator />
+
+      {/* 5. Galeria de Portfólio VIP: FUNDO BRANCO */}
+      <PortfolioSection />
+
+      {/* 6. Processo de Trabalho em 4 Etapas: FUNDO PRETO */}
+      <ProcessSection />
+
+      {/* 7. Institucional & Showroom: FUNDO BRANCO */}
       <AboutSection />
 
-      {/* CTA Banner de Alta Conversão */}
-      <CtaBanner />
+      {/* 8. Perguntas Frequentes (FAQ): FUNDO PRETO */}
+      <FaqSection />
 
-      {/* Seção Contato & Formulário Inteligente */}
+      {/* 9. Depoimentos de Arquitetos & Clientes VIP: FUNDO BRANCO */}
+      <TestimonialsSection />
+
+      {/* 10. Formulário de Contato & Mapa Showroom: FUNDO PRETO */}
       <ContactSection />
 
-      {/* Footer Minimalista */}
+      {/* 11. Call-to-Action Banner Final: FUNDO PRETO */}
+      <CtaBanner />
+
+      {/* 12. Footer Minimalista de Luxo: FUNDO PRETO */}
       <Footer />
 
       {/* Botão Flutuante do WhatsApp */}

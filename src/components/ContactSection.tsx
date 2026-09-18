@@ -1,21 +1,29 @@
 import React, { useState } from 'react';
-import { MessageCircle, Instagram, MapPin, Clock, Phone, Send, Check } from 'lucide-react';
+import { MessageCircle, MapPin, Clock, Phone, Send, CheckCircle2, ShieldCheck, Sparkles } from 'lucide-react';
 import { siteConfig } from '../config/site';
+
+const InstagramIcon: React.FC<{ className?: string }> = ({ className = "w-5 h-5" }) => (
+  <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+  </svg>
+);
 
 export const ContactSection: React.FC = () => {
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
-    material: 'Mármore',
-    solution: 'Bancadas de cozinha',
+    material: 'Ilha Ônix Rosa',
+    solution: 'Bancadas & Ilhas Cozinha',
     message: ''
   });
 
   const getWhatsappUrl = () => {
     const text = encodeURIComponent(
-      `Olá! Meu nome é *${formData.name || 'Cliente'}* (${formData.phone || 'Sem telefone'}).\n` +
-      `Tenho interesse em: *${formData.solution}* no material *${formData.material}*.\n` +
-      (formData.message ? `Observações: ${formData.message}` : '')
+      `Olá Stone Gran Lux! Meu nome é *${formData.name || 'Cliente'}* (${formData.phone || 'Sem telefone'}).\n` +
+      `Gostaria de um orçamento para: *${formData.solution}* no material *${formData.material}*.\n` +
+      (formData.message ? `Detalhes: ${formData.message}` : '')
     );
     return `https://wa.me/${siteConfig.whatsappNumber}?text=${text}`;
   };
@@ -26,17 +34,27 @@ export const ContactSection: React.FC = () => {
   };
 
   return (
-    <section id="contato" className="py-24 md:py-32 bg-[#FBF9F5] text-[#242320]">
-      <div className="max-w-7xl mx-auto px-6 md:px-12">
+    <section id="contato" className="py-24 md:py-32 bg-[#0A0A0C] text-white border-t border-b border-[#D4AF37]/30 relative overflow-hidden">
+      
+      {/* Decorative Top Accent Bar */}
+      <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-[#D4AF37] to-transparent" />
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
         
         {/* Cabeçalho */}
-        <div className="max-w-2xl mb-16">
-          <span className="text-xs uppercase tracking-[0.25em] text-[#A88B63] font-semibold block mb-3">
-            Atendimento Direto
-          </span>
-          <h2 className="font-serif text-3xl sm:text-5xl font-light leading-tight tracking-tight text-[#121110]">
-            CONTATO E <br />
-            <span className="font-normal italic text-[#A88B63]">ORÇAMENTOS.</span>
+        <div className="max-w-3xl mb-16 space-y-3">
+          <div className="inline-flex items-center gap-2 px-4 py-1 bg-black/80 border border-[#D4AF37]/40 rounded-full">
+            <Sparkles className="w-3.5 h-3.5 text-[#D4AF37]" />
+            <span className="text-[10px] sm:text-xs uppercase tracking-[0.25em] text-[#F7E7AD] font-semibold">
+              SOLICITAÇÃO DE ORÇAMENTO & CONSULTORIA VIP
+            </span>
+          </div>
+
+          <h2 className="font-serif text-3xl sm:text-5xl font-light leading-tight tracking-tight text-white">
+            FALE COM NOSSOS ENGENHEIROS & <br />
+            <span className="font-normal italic text-transparent bg-clip-text bg-gradient-to-r from-[#F7E7AD] via-[#D4AF37] to-[#C5A059]">
+              RECEBA SEU PROJETO EM ATÉ 24H
+            </span>
           </h2>
         </div>
 
@@ -45,59 +63,67 @@ export const ContactSection: React.FC = () => {
           {/* Lado Esquerdo: Cards de Informações de Contato */}
           <div className="lg:col-span-5 space-y-8">
             
-            <div className="bg-white border border-[#EAE6DD] p-8 space-y-6 shadow-sm">
-              <h3 className="font-serif text-2xl font-light text-[#121110]">Informações de Atendimento</h3>
+            <div className="bg-[#121215] border border-[#D4AF37]/40 p-8 space-y-6 shadow-2xl rounded-sm">
+              <h3 className="font-serif text-2xl font-bold text-white">Atendimento Exclusivo Stone Gran Lux</h3>
               
-              <div className="space-y-5">
+              <div className="space-y-4">
                 <a
                   href={`https://wa.me/${siteConfig.whatsappNumber}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-start gap-4 p-4 bg-[#F4F0E8] hover:bg-[#121110] text-[#121110] hover:text-white transition-colors group"
+                  className="flex items-start gap-4 p-4 bg-gradient-to-r from-[#F7E7AD] via-[#D4AF37] to-[#AA822A] text-black transition-transform hover:scale-[1.02] shadow-[0_0_20px_rgba(212,175,55,0.3)] font-bold rounded-xs"
                 >
-                  <MessageCircle className="w-5 h-5 text-[#A88B63] group-hover:text-[#C5A880] shrink-0 mt-0.5" />
+                  <MessageCircle className="w-6 h-6 fill-black text-black shrink-0 mt-0.5" />
                   <div>
-                    <span className="text-[10px] uppercase tracking-wider text-[#A88B63] block font-semibold">WhatsApp Direto</span>
-                    <span className="font-serif text-lg">{siteConfig.whatsappFormatted}</span>
+                    <span className="text-[10px] uppercase tracking-wider text-black block font-extrabold">WhatsApp Direto VIP</span>
+                    <span className="font-serif text-xl">{siteConfig.whatsappFormatted}</span>
                   </div>
                 </a>
+
+                <div className="flex items-start gap-4 p-4 bg-black/60 border border-white/10 rounded-xs">
+                  <Phone className="w-5 h-5 text-[#D4AF37] shrink-0 mt-0.5" />
+                  <div>
+                    <span className="text-[10px] uppercase tracking-wider text-gray-400 block">Central de Vendas</span>
+                    <span className="font-semibold text-sm text-white">{siteConfig.phone}</span>
+                  </div>
+                </div>
 
                 <a
                   href={siteConfig.instagramUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-start gap-4 p-4 border border-[#EAE6DD] hover:border-[#C5A880] transition-colors"
+                  className="flex items-start gap-4 p-4 bg-black/60 border border-white/10 hover:border-[#D4AF37] transition-colors rounded-xs"
                 >
-                  <Instagram className="w-5 h-5 text-[#A88B63] shrink-0 mt-0.5" />
+                  <InstagramIcon className="w-5 h-5 text-[#D4AF37] shrink-0 mt-0.5" />
                   <div>
-                    <span className="text-[10px] uppercase tracking-wider text-gray-500 block">Instagram Oficial</span>
-                    <span className="font-medium text-sm text-[#121110]">{siteConfig.instagram}</span>
+                    <span className="text-[10px] uppercase tracking-wider text-gray-400 block">Instagram de Obras</span>
+                    <span className="font-semibold text-sm text-white">{siteConfig.instagram}</span>
                   </div>
                 </a>
 
-                <div className="flex items-start gap-4 p-4 border border-[#EAE6DD]">
-                  <MapPin className="w-5 h-5 text-[#A88B63] shrink-0 mt-0.5" />
+                <div className="flex items-start gap-4 p-4 bg-black/60 border border-white/10 rounded-xs">
+                  <MapPin className="w-5 h-5 text-[#D4AF37] shrink-0 mt-0.5" />
                   <div>
-                    <span className="text-[10px] uppercase tracking-wider text-gray-500 block">Endereço do Showroom</span>
-                    <span className="font-medium text-sm text-[#121110] block">{siteConfig.fullAddress}</span>
+                    <span className="text-[10px] uppercase tracking-wider text-gray-400 block">Showroom Principal</span>
+                    <span className="font-semibold text-sm text-white block">{siteConfig.fullAddress}</span>
                   </div>
                 </div>
 
-                <div className="flex items-start gap-4 p-4 border border-[#EAE6DD]">
-                  <Clock className="w-5 h-5 text-[#A88B63] shrink-0 mt-0.5" />
+                <div className="flex items-start gap-4 p-4 bg-black/60 border border-white/10 rounded-xs">
+                  <Clock className="w-5 h-5 text-[#D4AF37] shrink-0 mt-0.5" />
                   <div>
-                    <span className="text-[10px] uppercase tracking-wider text-gray-500 block">Horário de Funcionamento</span>
-                    <span className="font-medium text-xs text-gray-700 block">{siteConfig.hours}</span>
+                    <span className="text-[10px] uppercase tracking-wider text-gray-400 block">Horário de Funcionamento</span>
+                    <span className="font-semibold text-xs text-gray-300 block">{siteConfig.hours}</span>
                   </div>
                 </div>
               </div>
             </div>
 
             {/* Google Maps Embed iframe */}
-            <div className="bg-white border border-[#EAE6DD] p-2 aspect-[16/9] shadow-sm overflow-hidden">
+            <div className="bg-[#121215] border border-[#D4AF37]/30 p-2 aspect-[16/9] shadow-2xl overflow-hidden rounded-sm">
               <iframe
-                title="Mapa de Localização Marmoreli"
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3656.340058284547!2d-46.69766942377317!3d-23.60999556402434!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ce50c8227b9df3%3A0x6a053c834e9e03d0!2sAv.%20das%20Na%C3%A7%C3%B5es%20Unidas%2C%2012901%20-%20Brooklin%2C%20S%C3%A3o%20Paulo%20-%20SP!5e0!3m2!1spt-BR!2sbr!4v1700000000000!5m2!1spt-BR!2sbr"
+                title="Mapa de Localização Stone Gran Lux"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3657.197587842618!2d-46.67139192377402!3d-23.56134886161286!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ce59d3d376813b%3A0x8bb8c8c5c3789b70!2sAv.%20Europa%2C%201420%20-%20Jardins%2C%20S%C3%A3o%20Paulo%20-%20SP!5e0!3m2!1spt-BR!2sbr!4v1700000000000!5m2!1spt-BR!2sbr"
                 width="100%"
                 height="100%"
                 style={{ border: 0 }}
@@ -110,63 +136,66 @@ export const ContactSection: React.FC = () => {
 
           </div>
 
-          {/* Lado Direito: Formulário Pré-Orçamento Inteligente */}
-          <div className="lg:col-span-7 bg-white border border-[#EAE6DD] p-8 md:p-10 shadow-xl space-y-6">
+          {/* Lado Direito: Formulário Inteligente */}
+          <div className="lg:col-span-7 bg-[#121215] border-2 border-[#D4AF37] p-8 md:p-10 shadow-2xl text-white space-y-6 rounded-sm">
             <div>
-              <h3 className="font-serif text-2xl font-light text-[#121110]">Simulador de Orçamento Rápido</h3>
-              <p className="text-xs text-gray-500 font-light mt-1">
-                Preencha os dados abaixo para gerar a mensagem automatizada diretamente para nosso WhatsApp.
+              <span className="text-[10px] uppercase tracking-[0.2em] text-[#D4AF37] font-bold block mb-1">
+                FORMULÁRIO DE ORÇAMENTO RÁPIDO
+              </span>
+              <h3 className="font-serif text-2xl font-bold text-white">Receba uma Cotação Detalhada</h3>
+              <p className="text-xs text-gray-400 font-light mt-1">
+                Preencha os dados e receba o orçamento direto no seu WhatsApp em instantes.
               </p>
             </div>
 
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <div className="space-y-2">
-                  <label className="text-xs uppercase tracking-wider text-gray-700 font-medium">Seu Nome</label>
+                  <label className="text-xs uppercase tracking-wider text-[#D4AF37] font-semibold">Seu Nome Completo</label>
                   <input
                     type="text"
                     required
-                    placeholder="Ex: Ana Silva"
+                    placeholder="Ex: Dra. Patrícia Lima"
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    className="w-full px-4 py-3 bg-[#FBF9F5] border border-[#EAE6DD] focus:border-[#C5A880] focus:outline-none text-sm font-light text-[#121110]"
+                    className="w-full px-4 py-3 bg-black border border-white/20 focus:border-[#D4AF37] focus:outline-none text-sm font-light text-white"
                   />
                 </div>
 
                 <div className="space-y-2">
-                  <label className="text-xs uppercase tracking-wider text-gray-700 font-medium">Seu WhatsApp</label>
+                  <label className="text-xs uppercase tracking-wider text-[#D4AF37] font-semibold">Seu WhatsApp</label>
                   <input
                     type="tel"
                     required
                     placeholder="Ex: (11) 99999-8888"
                     value={formData.phone}
                     onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                    className="w-full px-4 py-3 bg-[#FBF9F5] border border-[#EAE6DD] focus:border-[#C5A880] focus:outline-none text-sm font-light text-[#121110]"
+                    className="w-full px-4 py-3 bg-black border border-white/20 focus:border-[#D4AF37] focus:outline-none text-sm font-light text-white"
                   />
                 </div>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <div className="space-y-2">
-                  <label className="text-xs uppercase tracking-wider text-gray-700 font-medium">Material Preferido</label>
+                  <label className="text-xs uppercase tracking-wider text-[#D4AF37] font-semibold">Pedra de Interesse</label>
                   <select
                     value={formData.material}
                     onChange={(e) => setFormData({ ...formData, material: e.target.value })}
-                    className="w-full px-4 py-3 bg-[#FBF9F5] border border-[#EAE6DD] focus:border-[#C5A880] focus:outline-none text-sm font-light text-[#121110]"
+                    className="w-full px-4 py-3 bg-black border border-white/20 focus:border-[#D4AF37] focus:outline-none text-sm font-light text-white"
                   >
                     {siteConfig.materials.map((m) => (
                       <option key={m.id} value={m.name}>{m.name}</option>
                     ))}
-                    <option value="Ainda preciso de orientação">Ainda preciso de orientação</option>
+                    <option value="Outra pedra sob consulta">Outra pedra sob consulta</option>
                   </select>
                 </div>
 
                 <div className="space-y-2">
-                  <label className="text-xs uppercase tracking-wider text-gray-700 font-medium">Aplicação / Solução</label>
+                  <label className="text-xs uppercase tracking-wider text-[#D4AF37] font-semibold">Aplicação no Projeto</label>
                   <select
                     value={formData.solution}
                     onChange={(e) => setFormData({ ...formData, solution: e.target.value })}
-                    className="w-full px-4 py-3 bg-[#FBF9F5] border border-[#EAE6DD] focus:border-[#C5A880] focus:outline-none text-sm font-light text-[#121110]"
+                    className="w-full px-4 py-3 bg-black border border-white/20 focus:border-[#D4AF37] focus:outline-none text-sm font-light text-white"
                   >
                     {siteConfig.solutions.map((s) => (
                       <option key={s.id} value={s.title}>{s.title}</option>
@@ -176,22 +205,22 @@ export const ContactSection: React.FC = () => {
               </div>
 
               <div className="space-y-2">
-                <label className="text-xs uppercase tracking-wider text-gray-700 font-medium">Detalhes do Projeto ou Medidas (Opcional)</label>
+                <label className="text-xs uppercase tracking-wider text-[#D4AF37] font-semibold">Mensagem / Medidas do Projeto</label>
                 <textarea
                   rows={4}
-                  placeholder="Ex: Gostaria de orçar uma ilha de cozinha de 2,40m x 1,10m com cuba esculpida..."
+                  placeholder="Ex: Preciso de uma ilha de cozinha de 3.00m x 1.20m em Ilha Ônix Rosa com borda em 45º..."
                   value={formData.message}
                   onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                  className="w-full px-4 py-3 bg-[#FBF9F5] border border-[#EAE6DD] focus:border-[#C5A880] focus:outline-none text-sm font-light text-[#121110]"
+                  className="w-full px-4 py-3 bg-black border border-white/20 focus:border-[#D4AF37] focus:outline-none text-sm font-light text-white"
                 />
               </div>
 
               <button
                 type="submit"
-                className="w-full py-4 bg-[#121110] hover:bg-[#C5A880] text-[#C5A880] hover:text-[#121110] font-semibold text-xs uppercase tracking-[0.2em] transition-all duration-300 flex items-center justify-center gap-3 shadow-lg"
+                className="w-full py-4 bg-gradient-to-r from-[#F7E7AD] via-[#D4AF37] to-[#AA822A] hover:from-[#FFF0BF] hover:to-[#C5A059] text-black font-bold text-xs uppercase tracking-[0.2em] transition-all duration-300 flex items-center justify-center gap-3 shadow-[0_0_20px_rgba(212,175,55,0.4)]"
               >
-                <Send className="w-4 h-4" />
-                <span>Enviar para o WhatsApp</span>
+                <Send className="w-4 h-4 text-black" />
+                <span>Enviar Solicitação para o WhatsApp</span>
               </button>
             </form>
           </div>

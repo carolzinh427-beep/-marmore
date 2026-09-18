@@ -1,40 +1,56 @@
 export interface MaterialItem {
   id: string;
   name: string;
+  category: 'onix' | 'exoticos' | 'quartzitos' | 'marmores' | 'granitos';
   subtitle: string;
   description: string;
   image: string;
   features: string[];
+  specs: {
+    origin: string;
+    finish: string;
+    thickness: string;
+    rarity: 'Coleção Exclusiva' | 'Translúcido' | 'Tendência' | 'Clássico Nobre' | 'Super Raro';
+    estimatedPrice: string;
+  };
 }
 
 export interface SolutionItem {
   id: string;
   title: string;
+  subtitle: string;
   description: string;
   image: string;
+  highlights: string[];
 }
 
 export interface PortfolioProject {
   id: string;
   title: string;
-  category: 'Cozinhas' | 'Banheiros' | 'Gourmet' | 'Escadas' | 'Comerciais';
+  category: 'Cozinhas' | 'Banheiros' | 'Gourmet' | 'Escadas' | 'Painéis & Ônix' | 'Comerciais';
   environment: string;
   materialUsed: string;
   description: string;
   image: string;
-  galleryImages?: string[];
   location?: string;
 }
 
 export interface ProcessStep {
   number: string;
   title: string;
+  subtitle: string;
   description: string;
 }
 
 export interface DifferentialItem {
+  icon: string;
   title: string;
   description: string;
+}
+
+export interface FaqItem {
+  question: string;
+  answer: string;
 }
 
 export interface SiteConfig {
@@ -56,286 +72,399 @@ export interface SiteConfig {
   hours: string;
   yearsExperience: number;
   projectsCompleted: string;
-  aboutTextHeading: string;
-  aboutTextParagraph1: string;
-  aboutTextParagraph2: string;
-  aboutImage: string;
+  warrantyYears: number;
   heroImage: string;
   materials: MaterialItem[];
   solutions: SolutionItem[];
   portfolio: PortfolioProject[];
   processSteps: ProcessStep[];
   differentials: DifferentialItem[];
+  faqs: FaqItem[];
 }
 
 export const siteConfig: SiteConfig = {
-  name: "MARMORELI",
-  tagline: "Mármores, Granitos e Superfícies Especiais",
-  slogan: "A PEDRA CERTA TRANSFORMA O AMBIENTE.",
-  heroSubheading: "Projetos sob medida em pedras naturais e superfícies especiais, unindo precisão, acabamento e sofisticação.",
+  name: "STONE GRAN LUX",
+  tagline: "Marmoraria de Luxo • Pedras Exóticas, Quartzitos & Ônix Translúcidos",
+  slogan: "ELEGÂNCIA ESCULPIDA EM PEDRA NATURAL",
+  heroSubheading: "Transformamos rochas nobres e superfícies exóticas importadas das melhores pedreiras do mundo em obras de arte sob medida com corte CNC a laser e precisão milimétrica.",
   city: "São Paulo",
   state: "SP",
-  phone: "(11) 98765-4321",
-  whatsappNumber: "5511987654321",
-  whatsappFormatted: "(11) 98765-4321",
-  defaultWhatsappMessage: "Olá! Gostaria de solicitar um orçamento sem compromisso para meu projeto com a Marmoreli.",
-  instagram: "@marmoreli.oficial",
+  phone: "(11) 99876-5432",
+  whatsappNumber: "5511998765432",
+  whatsappFormatted: "(11) 99876-5432",
+  defaultWhatsappMessage: "Olá Stone Gran Lux! Gostaria de solicitar um orçamento exclusivo sem compromisso para meu projeto em pedra nobre.",
+  instagram: "@stonegranlux",
   instagramUrl: "https://instagram.com",
-  address: "Av. das Nações Unidas, 12901 - Brooklin",
-  fullAddress: "Av. das Nações Unidas, 12901 - Brooklin, São Paulo - SP",
-  googleMapsUrl: "https://maps.google.com/?q=Av.+das+Na%C3%A7%C3%B5es+Unidas,+12901+-+Brooklin,+S%C3%A3o+Paulo+-+SP",
-  hours: "Segunda a Sexta: 08:00 às 18:00 | Sábado: 08:00 às 13:00",
-  yearsExperience: 18,
-  projectsCompleted: "+1.800",
-  aboutTextHeading: "EXPERIÊNCIA QUE SE VÊ NOS DETALHES.",
-  aboutTextParagraph1: "Na MARMORELI, transformamos rochas naturais e superfícies tecnológicas em obras de arte arquitetônicas sob medida. Atendendo aos mais exigentes padrões da arquitetura contemporânea e do design de interiores, unimos rigor técnico a um acabamento impecável.",
-  aboutTextParagraph2: "Nossa estrutura conta com tecnologia de ponta para medição a laser, corte CNC de precisão e uma equipe de mestres artesãos especializados. Cada peça é lapidada com paixão para elevar a estética, a funcionalidade e o valor de cada ambiente.",
-  aboutImage: "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=1200&q=80",
-  heroImage: "/images/hero_kitchen.jpg",
+  address: "Av. Europa, 1420 - Jardins",
+  fullAddress: "Av. Europa, 1420 - Jardins, São Paulo - SP",
+  googleMapsUrl: "https://maps.google.com/?q=Av.+Europa,+1420+-+Jardins,+S%C3%A3o+Paulo+-+SP",
+  hours: "Segunda a Sexta: 08:00 às 19:00 | Sábado: 08:00 às 14:00",
+  yearsExperience: 16,
+  projectsCompleted: "+2.400",
+  warrantyYears: 10,
+  heroImage: "/images/hero_black_gold_marble.jpg",
   
   materials: [
     {
-      id: "marmore",
-      name: "Mármore",
-      subtitle: "Nobreza atemporal e veios exclusivos",
-      description: "Pedra natural sofisticada de veios orgânicos expressivos. Indicada para lavabos de luxo, revestimentos internos, lareiras e áreas sociais.",
-      image: "/images/material_marble.jpg",
-      features: ["Veios únicos e irrepetíveis", "Toque aveludado e suave", "Sofisticação atemporal"]
+      id: "ilha-onix-rosa",
+      name: "Ilha Ônix Rosa",
+      category: "onix",
+      subtitle: "Translúcido Cênico & Rosa Quartz Nobre",
+      description: "Uma das pedras mais raras e desejadas da alta arquitetura. Possui transparência cristalina em tons suavemente rosados e veios dourados. Perfeito para ilhas centrais retroiluminadas por LED.",
+      image: "/images/onix_rosa.jpg",
+      features: [
+        "Permite retroiluminação LED cênica",
+        "Padrão único de rosa quartz e veios áureos",
+        "Máximo status em lavabos e ilhas gourmet"
+      ],
+      specs: {
+        origin: "Pérsia / Exótico Importado",
+        finish: "Polido Translúcido",
+        thickness: "2.0 cm",
+        rarity: "Translúcido",
+        estimatedPrice: "Consulte m²"
+      }
     },
     {
-      id: "granito",
-      name: "Granito",
-      subtitle: "Resistência extrema e versatilidade",
-      description: "Rocha de alta dureza, resistente a impactos, riscos e elevadas temperaturas. Excelente para bancadas de cozinha e áreas de uso frequente.",
-      image: "/images/material_granite.jpg",
-      features: ["Alta resistência ao calor", "Baixíssima porosidade", "Durabilidade por gerações"]
+      id: "ilha-onix-branco",
+      name: "Ilha Ônix Branco",
+      category: "onix",
+      subtitle: "Pureza Cristalina Translúcida com Veios Amber",
+      description: "Superfície de iluminação impressionante. A luz atravessa a rocha natural revelando intrincados veios ambarados e dourados. O ápice do luxo para banheiros master e balcões executivos.",
+      image: "/images/onix_branco.jpg",
+      features: [
+        "Transparência óptica excepcional",
+        "Brilho vítreo de alta joalheria",
+        "Ideal para painéis e balcões de destaque"
+      ],
+      specs: {
+        origin: "Itália / Exótico Importado",
+        finish: "Polido Cristalo",
+        thickness: "2.0 cm",
+        rarity: "Translúcido",
+        estimatedPrice: "Consulte m²"
+      }
     },
     {
-      id: "quartzito",
-      name: "Quartzito",
-      subtitle: "A beleza do mármore com a força do granito",
-      description: "Uma rocha natural exótica com padrões dramáticos, cristais translúcidos e durabilidade superior ao próprio granito.",
-      image: "/images/material_quartzite.jpg",
-      features: ["Permite iluminação cênica", "Resistente a manchas", "Visual de alta joalheria"]
-    },
-    {
-      id: "quartzo",
-      name: "Quartzo",
-      subtitle: "Superfície tecnológica pura e uniforme",
-      description: "Superfície engenheirada de quartzo natural. Oferece padrão estético homogêneo, zero porosidade e máxima higiene no manuseio de alimentos.",
-      image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80",
-      features: ["Zero absorção de líquidos", "Cores sólidas e modernas", "Fácil limpeza diária"]
-    },
-    {
-      id: "travertino",
-      name: "Travertino",
-      subtitle: "Textura acolhedora de tom terroso",
-      description: "Mármore calcário de presença marcante e tom bege quente. Perfeito para fachadas contemporâneas, hall de entrada e banheiros estilo spa.",
-      image: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1200&q=80",
-      features: ["Visual terroso e elegante", "Acabamento bruto ou estucado", "Estilo arquitetônico puro"]
-    },
-    {
-      id: "onix",
-      name: "Ônix",
-      subtitle: "Rocha translúcida para iluminação cênica",
-      description: "Pedra preciosa natural que permite a passagem de luz. O ápice do luxo para painéis decorativos, recepções e lavabos exclusivos.",
+      id: "granitos-exoticos-luxo",
+      name: "Granitos Exóticos Luxo",
+      category: "exoticos",
+      subtitle: "Fusion Wow, Titanium Gold & Blue Patagonia",
+      description: "Coleção de blocos selecionados à mão com composições minerais inacreditáveis. Misturas dramáticas de azuis profundos, veios de ouro e espirais negras que parecem pinturas vivas.",
       image: "/images/material_onyx.jpg",
-      features: ["Efeito translúcido espetacular", "Visual joia para iluminação", "Exclusividade máxima"]
+      features: [
+        "Padrão orgânico exclusivo e irrepetível",
+        "Dureza extrema e altíssima resistência",
+        "Disponível em acabamentos Polido ou Escovado"
+      ],
+      specs: {
+        origin: "Brasil / Itália / Madagáscar",
+        finish: "Polido Luxo / Velvet",
+        thickness: "2.0 cm - 3.0 cm",
+        rarity: "Coleção Exclusiva",
+        estimatedPrice: "Consulte m²"
+      }
+    },
+    {
+      id: "preto-sao-gabriel",
+      name: "Preto São Gabriel",
+      category: "granitos",
+      subtitle: "Clássico Intenso com Grãos Cristalinos Escuros",
+      description: "Fundo preto denso e homogêneo com delicadas salpicos cristalinas. Considerado um dos granitos negros mais elegantes e duráveis do mercado para bancadas de alto tráfego.",
+      image: "/images/hero_black_gold_marble.jpg",
+      features: [
+        "Resistência máxima a riscos e temperaturas",
+        "Porosidade nula com selagem de alta performance",
+        "Combina perfeitamente com metais dourados e pretos"
+      ],
+      specs: {
+        origin: "Espírito Santo, Brasil",
+        finish: "Polido / Escovado / Levigado",
+        thickness: "2.0 cm",
+        rarity: "Clássico Nobre",
+        estimatedPrice: "Consulte m²"
+      }
+    },
+    {
+      id: "branco-pitaya",
+      name: "Branco Pitaya",
+      category: "quartzitos",
+      subtitle: "Fundo Alvo Puríssimo com Pontilhados Mineral escuros",
+      description: "Superfície contemporânea com estética vibrante inspirada no contraste da fruta pitaya. Traz amplitude imediata e luz para cozinhas gourmets e banheiros modernos.",
+      image: "/images/material_quartzite.jpg",
+      features: [
+        "Elevado contraste de branco puríssimo e grãos escuros",
+        "Sensação de ambiente mais amplo e luminoso",
+        "Muito resistente a manchas de líquidos"
+      ],
+      specs: {
+        origin: "Brasil Selecionado",
+        finish: "Polido Super Brilho",
+        thickness: "2.0 cm",
+        rarity: "Tendência",
+        estimatedPrice: "Consulte m²"
+      }
+    },
+    {
+      id: "cinza-kensho",
+      name: "Cinza Kensho",
+      category: "quartzitos",
+      subtitle: "Sobriedade Mineral & Textura Arquitetônica",
+      description: "Quartzito minimalista em tom cinza titânio com veios alinhados sutis. A escolha número um de arquitetos contemporâneos para ambientes urbanos sofisticados.",
+      image: "/images/material_granite.jpg",
+      features: [
+        "Tonalidade neutra de altíssima elegância",
+        "Resistência mecânica superior ao próprio granito",
+        "Toque suave e acabamento fosco ou brilhante"
+      ],
+      specs: {
+        origin: "Minas Gerais, Brasil",
+        finish: "Levigado Satine / Polido",
+        thickness: "2.0 cm",
+        rarity: "Tendência",
+        estimatedPrice: "Consulte m²"
+      }
+    },
+    {
+      id: "bege-bahia",
+      name: "Bege Bahia",
+      category: "marmores",
+      subtitle: "Mármore Natural Clássico de Tom Terroso Acolhedor",
+      description: "Rocha calcária de renome internacional com textura aveludada e tonalidade bege cremosa. Traz aconchego atemporal a pisos, escadas, banheiros e painéis residenciais.",
+      image: "/images/solution_staircase.jpg",
+      features: [
+        "Sensação térmica e tátil extremamente agradável",
+        "Beleza orgânica com variações suaves de tom",
+        "Excelente para ambientes internos requintados"
+      ],
+      specs: {
+        origin: "Bahia, Brasil",
+        finish: "Estucado Polido / Bruto",
+        thickness: "2.0 cm",
+        rarity: "Clássico Nobre",
+        estimatedPrice: "Consulte m²"
+      }
+    },
+    {
+      id: "branco-estela",
+      name: "Branco Estela",
+      category: "quartzitos",
+      subtitle: "Brilho Estelar Mineral com Veios Prateados",
+      description: "Superfície puríssima salpicada de cristais que refletem a iluminação como pequenas estrelas. Traz brilho discreto e luxuoso para tampos sob medida.",
+      image: "/images/material_quartzite.jpg",
+      features: [
+        "Efeito cintilante sob iluminação focada",
+        "Zero absorção e facilidade de limpeza",
+        "Ideal para banheiros de suítes e recepções"
+      ],
+      specs: {
+        origin: "Ceará, Brasil",
+        finish: "Polido Espelhado",
+        thickness: "2.0 cm",
+        rarity: "Super Raro",
+        estimatedPrice: "Consulte m²"
+      }
+    },
+    {
+      id: "branco-zeus",
+      name: "Branco Zeus",
+      category: "quartzitos",
+      subtitle: "Quartzito de Pureza Divina & Estética Minimalista",
+      description: "Branco maciço impecável com densidade mineral surpreendente. Oferece o visual clean do mármore grego com a invulnerabilidade dos quartzitos nobres.",
+      image: "/images/material_marble.jpg",
+      features: [
+        "Branco homogêneo e cristalino",
+        "Ultra resistente a ácidos e manchas domésticas",
+        "Perfeito para cubas esculpidas em 45º"
+      ],
+      specs: {
+        origin: "Brasil Exclusivo",
+        finish: "Polido Luxo",
+        thickness: "2.0 cm",
+        rarity: "Coleção Exclusiva",
+        estimatedPrice: "Consulte m²"
+      }
+    },
+    {
+      id: "verde-guatemala",
+      name: "Verde Guatemala",
+      category: "marmores",
+      subtitle: "Mármore Nobre Verde Esmeralda com Veios Alvos",
+      description: "Um dos mármores mais dramáticos da história da arquitetura. Fundo verde floresta profundo recortado por teias de veios brancos reluzentes.",
+      image: "/images/verde_guatemala.jpg",
+      features: [
+        "Verde esmeralda intenso e marcante",
+        "Peças únicas para lavabos VIP e lareiras monumentais",
+        "Sensação imediata de sofisticação internacional"
+      ],
+      specs: {
+        origin: "Guatemala / Importação Direta",
+        finish: "Polido Espelhado",
+        thickness: "2.0 cm",
+        rarity: "Super Raro",
+        estimatedPrice: "Consulte m²"
+      }
     }
   ],
 
   solutions: [
     {
-      id: "bancadas-cozinha",
-      title: "Bancadas de cozinha",
-      description: "Acabamento em 45º (meia-esquadria) perfeito, frontões imponentes e cubas embutidas com precisão milimétrica.",
-      image: "/images/hero_kitchen.jpg"
-    },
-    {
-      id: "ilhas-gourmet",
-      title: "Ilhas gourmet",
-      description: "Monólitos centrais com cascatas laterais que transformam a cozinha no ponto focal da residência.",
-      image: "https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=1200&q=80"
+      id: "bancadas-gourmet",
+      title: "Bancadas & Ilhas Cozinha",
+      subtitle: "Monólitos com Meia-Esquadria 45º Perfeita",
+      description: "Ilhas centrais com cantos invisíveis em 45º, cascatas laterais e cubas totalmente integradas no mesmo material.",
+      image: "/images/hero_kitchen.jpg",
+      highlights: ["Corte CNC milimétrico", "Cubas esculpidas no material", "Junções em 45º imperceptíveis"]
     },
     {
       id: "banheiros-lavabos",
-      title: "Banheiros e lavabos",
-      description: "Bancadas com cubas esculpidas na própria pedra, nichos organizadores e revestimentos contínuos.",
-      image: "/images/solution_bathroom.jpg"
+      title: "Banheiros & Lavabos Esculpted",
+      subtitle: "Cubas Esculpidas & Painéis Contínuos",
+      description: "Bancadas suspensas com cubas ocultas de ralo invisível, nichos embutidos e revestimentos que transformam o banheiro em spa.",
+      image: "/images/solution_bathroom.jpg",
+      highlights: ["Ralo oculto esculpido", "Nichos sem emendas visíveis", "Impermeabilização selada"]
     },
     {
-      id: "escadas",
-      title: "Escadas",
-      description: "Degraus maciços, flutuantes ou em ângulo com frisos antiderrapantes e canaletas para LED.",
-      image: "/images/solution_staircase.jpg"
+      id: "paineis-retroiluminados",
+      title: "Painéis de Ônix Retroiluminados",
+      subtitle: "Cenografia de Luz em Ônix & Quartzitos",
+      description: "Instalações verticais com sistemas de iluminação LED de alta definição que transpassam as veias e cristais da pedra natural.",
+      image: "/images/onix_rosa.jpg",
+      highlights: ["Tecnologia LED 3000K", "Estrutura oculta sob medida", "Exclusividade total"]
     },
     {
-      id: "churrasqueiras",
-      title: "Churrasqueiras",
-      description: "Bancadas externas e revestimentos de alta resistência a temperatura e agentes de gordura.",
-      image: "https://images.unsplash.com/photo-1544984243-ec57ea16fe25?auto=format&fit=crop&w=1200&q=80"
-    },
-    {
-      id: "lareiras",
-      title: "Lareiras",
-      description: "Revestimentos imponentes do piso ao teto em peças inteiras ou alinhamento em livro-aberto (bookmatched).",
-      image: "https://images.unsplash.com/photo-1600585152220-90363fe7e115?auto=format&fit=crop&w=1200&q=80"
-    },
-    {
-      id: "nichos",
-      title: "Nichos",
-      description: "Nichos embutidos com cantos bisotados perfeitos para otimizar espaço em áreas molhadas.",
-      image: "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=1200&q=80"
-    },
-    {
-      id: "revestimentos",
-      title: "Revestimentos",
-      description: "Painéis verticais de grande formato para halls de entrada, salas de estar e fachadas.",
-      image: "https://images.unsplash.com/photo-1600566753376-12c8ab7fb75b?auto=format&fit=crop&w=1200&q=80"
-    },
-    {
-      id: "projetos-personalizados",
-      title: "Projetos personalizados",
-      description: "Mobiliário em pedra natural, mesas de jantar, tampos sob medida e peças de design assinado.",
-      image: "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=1200&q=80"
+      id: "escadas-imponentes",
+      title: "Escadas Monolíticas",
+      subtitle: "Degraus Flutuantes & Iluminação Integrada",
+      description: "Escadas monumentais com acabamento bisotado, frisos antiderrapantes discretos e canaletas para fitas de LED.",
+      image: "/images/solution_staircase.jpg",
+      highlights: ["Estrutura flutuante", "Friso antiderrapante a laser", "LED embutido no piso"]
     }
   ],
 
   portfolio: [
     {
       id: "proj-1",
-      title: "Ilha em Quartzito Nero Titanium",
-      category: "Cozinhas",
+      title: "Ilha Monolítica em Ilha Ônix Rosa",
+      category: "Painéis & Ônix",
       environment: "Cozinha Integrada Gourmet",
-      materialUsed: "Quartzito Nero Titanium",
-      description: "Cozinha contemporânea em conceito aberto com ilha central monolítica e cascata dupla em 45º.",
-      image: "/images/hero_kitchen.jpg",
+      materialUsed: "Ilha Ônix Rosa Translúcido",
+      description: "Ilha central com iluminação cênica interna e acabamentos em latão dourado escovado.",
+      image: "/images/onix_rosa.jpg",
       location: "Jardins, SP"
     },
     {
       id: "proj-2",
-      title: "Lavabo Esculpido em Calacatta",
+      title: "Lavabo VIP em Verde Guatemala",
       category: "Banheiros",
-      environment: "Lavabo Social de Luxo",
-      materialUsed: "Mármore Calacatta Gold",
-      description: "Bancada suspensa com cuba esculpida integrada no próprio mármore e espelho com LED periférico.",
-      image: "/images/solution_bathroom.jpg",
-      location: "Alphaville, Barueri"
+      environment: "Lavabo Social Residencial",
+      materialUsed: "Mármore Verde Guatemala",
+      description: "Bancada suspensa com cuba esculpida e parede inteira revestida em página única.",
+      image: "/images/verde_guatemala.jpg",
+      location: "Alphaville, SP"
     },
     {
       id: "proj-3",
-      title: "Escada Flutuante Monolítica",
-      category: "Escadas",
-      environment: "Hall de Entrada Residencial",
-      materialUsed: "Quartzito Mont Blanc",
-      description: "Degraus engastados em estrutura metálica revestidos com borda reta de 4cm e canaleta inferior para iluminação.",
-      image: "/images/solution_staircase.jpg",
-      location: "Morumbi, SP"
-    },
-    {
-      id: "proj-4",
-      title: "Painel Retroiluminado de Ônix",
-      category: "Comerciais",
-      environment: "Recepção Executiva",
-      materialUsed: "Ônix Amber Translucido",
-      description: "Painel de recepção corporativo com retroiluminação LED de temperatura 3000K realçando veios naturais.",
-      image: "/images/material_onyx.jpg",
-      location: "Faria Lima, SP"
-    },
-    {
-      id: "proj-5",
-      title: "Espaço Gourmet Black Absolute",
-      category: "Gourmet",
-      environment: "Varanda Gourmet de Cobertura",
-      materialUsed: "Granito Preto São Gabriel Escovado",
-      description: "Bancada em L com acabamento escovado anti-manchas, cooktop de indução nivelado e churrasqueira integrada.",
-      image: "https://images.unsplash.com/photo-1544984243-ec57ea16fe25?auto=format&fit=crop&w=1200&q=80",
+      title: "Cozinha Gourmet Preto São Gabriel Escovado",
+      category: "Cozinhas",
+      environment: "Espaço Gourmet Integrado",
+      materialUsed: "Granito Preto São Gabriel",
+      description: "Bancada contínua com cascata lateral e calha úmida embutida.",
+      image: "/images/hero_black_gold_marble.jpg",
       location: "Itaim Bibi, SP"
     },
     {
-      id: "proj-6",
-      title: "Lareira Monumental Livro Aberto",
-      category: "Comerciais",
-      environment: "Living com Pé Direito Duplo",
-      materialUsed: "Quartzito Michelangelo",
-      description: "Revestimento vertical de 6 metros de altura com paginação espelhada estilo livro-aberto (bookmatched).",
-      image: "https://images.unsplash.com/photo-1600585152220-90363fe7e115?auto=format&fit=crop&w=1200&q=80",
-      location: "Alto de Pinheiros, SP"
-    },
-    {
-      id: "proj-7",
-      title: "Suíte Master em Travertino Navona",
-      category: "Banheiros",
-      environment: "Banheiro de Casal",
-      materialUsed: "Mármore Travertino Navona Estucado",
-      description: "Piso, paredes e bancada dupla revestidos em travertino levigado para atmosfera relaxante de spa.",
-      image: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1200&q=80",
-      location: "Vila Nova Conceição, SP"
-    },
-    {
-      id: "proj-8",
-      title: "Cozinha Minimalista Branco Puríssimo",
-      category: "Cozinhas",
-      environment: "Cozinha Residencial Modernista",
-      materialUsed: "Superfície de Quartzo Pure White",
-      description: "Bancadas contínuas sem emendas visíveis com frontão alto de 30cm e cuba em aço inox escovado.",
-      image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80",
-      location: "Pardinho, SP"
+      id: "proj-4",
+      title: "Painel de Recepção em Ilha Ônix Branco",
+      category: "Painéis & Ônix",
+      environment: "Hall de Entrada Corporativo",
+      materialUsed: "Ilha Ônix Branco Translúcido",
+      description: "Painel de 4 metros retroiluminado realçando os veios em tom ambarado.",
+      image: "/images/onix_branco.jpg",
+      location: "Faria Lima, SP"
     }
   ],
 
   processSteps: [
     {
       number: "01",
-      title: "ESCOLHA DO MATERIAL",
-      description: "Consultoria técnica individualizada na nossa galeria ou no seu projeto para selecionar a rocha ideal em estética e resistência."
+      title: "CONSULTORIA EXCLUSIVA",
+      subtitle: "Seleção do Bloco de Pedra",
+      description: "Atendimento personalizado onde apresentamos amostras físicas e auxiliamos na escolha da rocha perfeita para o estilo e exigência do seu projeto."
     },
     {
       number: "02",
-      title: "MEDIÇÃO",
-      description: "Visita técnica ao local com scanner 3D a laser para captura milimétrica dos ângulos, prumos e pontos de instalação."
+      title: "MEDIÇÃO 3D A LASER",
+      subtitle: "Precisão Milimétrica na Obra",
+      description: "Nossos engenheiros realizam o escaneamento digital do ambiente, eliminando riscos de desquadro e garantindo o encaixe exato."
     },
     {
       number: "03",
-      title: "PROJETO E CORTE",
-      description: "Desenvolvimento do plano de corte digital em ambiente CAD/CAM e execução por máquinas CNC de jato d'água."
+      title: "CORTE CNC DE ALTA PRECISÃO",
+      subtitle: "Lapidação & 45º Perfeito",
+      description: "Corte robotizado com jato d'água de altíssima precisão, promovendo junções de 45º imperceptíveis e cubas esculpidas perfeitas."
     },
     {
       number: "04",
-      title: "ACABAMENTO",
-      description: "Lapidação artesanal de meias-esquadrias (45º), montagem de cubas esculpidas e selagem de impermeabilização."
-    },
-    {
-      number: "05",
-      title: "INSTALAÇÃO",
-      description: "Entrega programada e fixação por equipe técnica própria com alinhamento a laser e proteção final da obra."
+      title: "INSTALAÇÃO VIP & GARANTIA",
+      subtitle: "Entrega Protegida em Sua Obra",
+      description: "Equipe técnica especializada uniformizada instala as peças com proteção especial contra impactos e selagem impermeabilizante."
     }
   ],
 
   differentials: [
     {
-      title: "Atendimento personalizado",
-      description: "Consultores especializados acompanham seu projeto desde a escolha do bloco até a entrega final."
+      icon: "Cpu",
+      title: "Corte CNC a Laser Robotizado",
+      description: "Tecnologia de usinagem digital que assegura recortes sem trincas e meias-esquadrias (45º) com acabamento imperceptível."
     },
     {
-      title: "Produção sob medida",
-      description: "Cortes e encaixes desenvolvidos especificamente para a arquitetura única do seu imóvel."
+      icon: "ShieldCheck",
+      title: "Garantia de 10 Anos em Instalação",
+      description: "Compromisso de longo prazo com a integridade estrutural, colagem e impermeabilização das pedras aplicadas."
     },
     {
-      title: "Materiais selecionados",
-      description: "Parceria direta com os maiores importadores e pedreiras do Brasil, Itália, Grécia e Espanha."
+      icon: "Globe",
+      title: "Pedras Raras de Pedreiras Exclusivas",
+      description: "Importação direta e parceria com os melhores mineradores do Brasil, Itália, Pérsia e Grécia."
     },
     {
-      title: "Acabamento profissional",
-      description: "Junções em 45º quase invisíveis, polimento homogêneo e aplicação preventiva de impermeabilizante."
+      icon: "Sparkles",
+      title: "Selagem Nano-Impermeabilizante",
+      description: "Tratamento de superfície de alta tecnologia que bloqueia absorção de líquidos, vinhos, óleos e café."
     },
     {
-      title: "Instalação especializada",
-      description: "Equipe técnica treinada e uniformizada com ferramental de precisão e protocolo de obra limpa."
+      icon: "Clock",
+      title: "Entrega Programada Sem Atrasos",
+      description: "Controle rigoroso do cronograma de produção para garantir que sua obra seja entregue exatamente na data combinada."
     },
     {
-      title: "Compromisso com cada projeto",
-      description: "Cumprimento rigoroso do cronograma combinado e suporte completo pós-instalação."
+      icon: "Compass",
+      title: "Acompanhamento por Engenheiros",
+      description: "Projetos validados por engenheiros e projetistas especializados em rochas ornamentais de alto padrão."
+    }
+  ],
+
+  faqs: [
+    {
+      question: "Qual a diferença entre Mármore, Granito e Quartzito?",
+      answer: "O Mármore é uma rocha nobre de veios orgânicos marcantes, ideal para ambientes internos como lavabos, lareiras e pisos. O Granito é altamente resistente e duro, recomendado para áreas de uso intenso. Já o Quartzito une a beleza estética e veios fluidos do mármore com uma durabilidade ainda maior do que o granito."
+    },
+    {
+      question: "Como funciona a garantia de 10 anos da Stone Gran Lux?",
+      answer: "Oferecemos garantia de 10 anos cobrindo a integridade da colagem das meias-esquadrias em 45º, alinhamento estrutural das peças e a impermeabilização inicial realizada por nossa equipe técnica VIP."
+    },
+    {
+      question: "O Ônix Rosa e Ônix Branco realmente podem receber iluminação LED?",
+      answer: "Sim! As pedras da linha Ilha Ônix possuem composição mineral translúcida. Desenvolvemos o projeto completo incluindo a estrutura traseira com fitas ou painéis de LED 3000K (luz quente), permitindo acender a pedra como uma joia cênica."
+    },
+    {
+      question: "Como solicitar um orçamento de forma rápida?",
+      answer: "Você pode clicar em qualquer botão 'Solicitar Orçamento via WhatsApp' ou utilizar nosso Simulador de Orçamento nesta página. Basta enviar as medidas aproximadas ou o projeto arquitetônico em PDF para nossa equipe retornar com o valor detalhado."
+    },
+    {
+      question: "Qual o prazo médio de entrega e instalação?",
+      answer: "Após a aprovação do projeto executivo e medição a laser no local, nosso prazo padrão de fabricação e instalação varia de 7 a 15 dias úteis."
     }
   ]
 };
