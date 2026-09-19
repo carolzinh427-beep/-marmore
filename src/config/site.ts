@@ -199,7 +199,7 @@ export const siteConfig: SiteConfig = {
       category: "quartzitos",
       subtitle: "Sobriedade Mineral & Textura Arquitetônica",
       description: "Quartzito minimalista em tom cinza titânio com veios alinhados sutis. A escolha número um de arquitetos contemporâneos para ambientes urbanos sofisticados.",
-      image: "/images/material_granite.jpg",
+      image: "/images/cinza_kensho.jpg",
       features: [
         "Tonalidade neutra de altíssima elegância",
         "Resistência mecânica superior ao próprio granito",
