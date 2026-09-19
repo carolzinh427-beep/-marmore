@@ -159,7 +159,7 @@ export const siteConfig: SiteConfig = {
       category: "granitos",
       subtitle: "Clássico Intenso com Grãos Cristalinos Escuros",
       description: "Fundo preto denso e homogêneo com delicadas salpicos cristalinas. Considerado um dos granitos negros mais elegantes e duráveis do mercado para bancadas de alto tráfego.",
-      image: "/images/hero_black_gold_marble.jpg",
+      image: "/images/preto_sao_gabriel.jpg",
       features: [
         "Resistência máxima a riscos e temperaturas",
         "Porosidade nula com selagem de alta performance",
