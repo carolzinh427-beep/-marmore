@@ -18,7 +18,7 @@ export const BudgetCalculator: React.FC = () => {
     { name: 'Branco Pitaya', multiplier: 1.1, badge: 'Tendência Modernista' },
     { name: 'Cinza Kensho', multiplier: 1.2, badge: 'Quartzito Arquitetônico' },
     { name: 'Bege Bahia', multiplier: 1.1, badge: 'Mármore Clássico' },
-    { name: 'Branco Estela', multiplier: 1.3, badge: 'Quartzito Cintilante' },
+    { name: 'Branco Estelar', multiplier: 1.3, badge: 'Quartzo Cintilante' },
     { name: 'Branco Zeus', multiplier: 1.4, badge: 'Quartzito Prime' },
   ];
 

@@ -234,12 +234,12 @@ export const siteConfig: SiteConfig = {
       }
     },
     {
-      id: "branco-estela",
-      name: "Branco Estela",
+      id: "branco-estelar",
+      name: "Branco Estelar",
       category: "quartzitos",
-      subtitle: "Brilho Estelar Mineral com Veios Prateados",
-      description: "Superfície puríssima salpicada de cristais que refletem a iluminação como pequenas estrelas. Traz brilho discreto e luxuoso para tampos sob medida.",
-      image: "/images/material_quartzite.jpg",
+      subtitle: "Brilho Estelar Mineral com Espelhos Cristalinos",
+      description: "Superfície puríssima salpicada de microespelhos de quartzo que refletem a iluminação como pequenas estrelas. Tradição e brilho moderno para bancadas nobres.",
+      image: "/images/branco_estelar.jpg",
       features: [
         "Efeito cintilante sob iluminação focada",
         "Zero absorção e facilidade de limpeza",
