@@ -219,7 +219,7 @@ export const siteConfig: SiteConfig = {
       category: "marmores",
       subtitle: "Mármore Natural Clássico de Tom Terroso Acolhedor",
       description: "Rocha calcária de renome internacional com textura aveludada e tonalidade bege cremosa. Traz aconchego atemporal a pisos, escadas, banheiros e painéis residenciais.",
-      image: "/images/solution_staircase.jpg",
+      image: "/images/bege_bahia.jpg",
       features: [
         "Sensação térmica e tátil extremamente agradável",
         "Beleza orgânica com variações suaves de tom",
