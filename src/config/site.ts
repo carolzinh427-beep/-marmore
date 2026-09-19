@@ -299,7 +299,7 @@ export const siteConfig: SiteConfig = {
       category: "quartzitos",
       subtitle: "Nobreza Marfim com Veias Áureas Delicadas",
       description: "Considerado o rei dos quartzitos internacionais. Tom bege marfim acetinado atravessado por rios suaves de ouro e bronze mineral.",
-      image: "/images/material_quartzite.jpg",
+      image: "/images/taj_mahal.jpg",
       features: [
         "Resistência mecânica extrema",
         "Padrão cromático neutro e sofisticado",
