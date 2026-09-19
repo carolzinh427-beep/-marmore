@@ -259,7 +259,7 @@ export const siteConfig: SiteConfig = {
       category: "quartzitos",
       subtitle: "Quartzito de Pureza Divina & Estética Minimalista",
       description: "Branco maciço impecável com densidade mineral surpreendente. Oferece o visual clean do mármore grego com a invulnerabilidade dos quartzitos nobres.",
-      image: "/images/material_marble.jpg",
+      image: "/images/branco_zeus.jpg",
       features: [
         "Branco homogêneo e cristalino",
         "Ultra resistente a ácidos e manchas domésticas",
