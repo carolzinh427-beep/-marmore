@@ -319,7 +319,7 @@ export const siteConfig: SiteConfig = {
       category: "quartzitos",
       subtitle: "Elegância Pérola Iridescente & Suavidade",
       description: "Fundo perolado translúcido com formações minerais onduladas que lembram madrepérola natural. Transmite paz e nobreza.",
-      image: "/images/solution_bathroom.jpg",
+      image: "/images/perla_santana.jpg",
       features: [
         "Brilho iridescente sob luz natural",
         "Porosidade extremamente baixa",
